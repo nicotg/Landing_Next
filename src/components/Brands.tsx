@@ -1,5 +1,4 @@
 import React from 'react';
-import { ShieldCheckIcon, BoltIcon, DropIcon } from './icons';
 
 const brands = [
   "Ray-Ban",
@@ -14,31 +13,37 @@ const brands = [
 
 const technologies = [
   {
-    name: "Transitions®",
-    description: "Lentes inteligentes a la luz. Se oscurecen en exteriores y se aclaran en interiores para comodidad total.",
-    icon: BoltIcon,
-    accent: "bg-blue-100 text-blue-700"
+    name: "Progresivos Custom",
+    category: "Progresivos",
+    description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
   },
   {
-    name: "Crizal®",
-    description: "Tratamiento superior antirreflejos que repele agua, polvo y protege contra los rayos UV.",
-    icon: ShieldCheckIcon,
-    accent: "bg-emerald-100 text-emerald-700"
+    name: "Polarys",
+    category: "Polarizado",
+    description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
   },
   {
-    name: "Varilux®",
-    description: "Los lentes multifocales más avanzados para una visión nítida a cualquier distancia sin esfuerzo.",
-    icon: DropIcon,
-    accent: "bg-purple-100 text-purple-700"
-  }
+    name: "Prolayer",
+    category: "Antirreflejo",
+    description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
+  },
+  {
+    name: "Minux",
+    category: "Antirreflejo",
+    description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
+  },
+  {
+    name: "Arsion",
+    category: "Antirreflejo",
+    description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
+  },
 ];
 
 export const Brands: React.FC = () => {
   return (
     <section id="marcas" className="py-24 bg-light/30">
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Marcas de Anteojos (Estilo Minimalista) */}
+
         <div className="text-center mb-20">
           <p className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10">
             Trabajamos con las mejores marcas de armazones
@@ -54,10 +59,8 @@ export const Brands: React.FC = () => {
           </div>
         </div>
 
-        {/* Separador */}
         <div className="w-full h-px bg-light/80 mb-20"></div>
 
-        {/* Tecnología Óptica (Cards Premium) */}
         <div className="text-center mb-12">
           <h3 className="text-3xl md:text-4xl font-bold text-dark mb-4">Tecnología Óptica de Vanguardia</h3>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
@@ -65,24 +68,25 @@ export const Brands: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {technologies.map((tech, idx) => {
-            const Icon = tech.icon;
-            return (
-              <div 
-                key={idx} 
-                className="bg-white p-10 rounded-3xl shadow-sm border border-light hover:shadow-2xl hover:border-accent/30 transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${tech.accent}`}>
-                  <Icon size={28} />
-                </div>
-                <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
-                <p className="text-gray-600 font-light leading-relaxed">
-                  {tech.description}
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {technologies.map((tech, idx) => (
+            <div
+              key={idx}
+              className="bg-white p-8 rounded-3xl shadow-sm border border-light hover:shadow-2xl hover:border-accent/30 transition-all duration-300 transform hover:-translate-y-2 flex flex-col"
+            >
+              {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
+              <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
+                <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
               </div>
-            );
-          })}
+              <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
+                {tech.category}
+              </span>
+              <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
+              <p className="text-gray-600 font-light leading-relaxed">
+                {tech.description}
+              </p>
+            </div>
+          ))}
         </div>
 
       </div>
