@@ -1,5 +1,5 @@
 import React from 'react';
-import { PinIcon, PhoneIcon, ClockIcon, ChatIcon } from './icons';
+import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon } from './icons';
 
 export const Contact: React.FC = () => {
   return (
@@ -83,7 +83,7 @@ export const Contact: React.FC = () => {
                   type="button"
                   className="w-full py-4 bg-[#25D366] hover:bg-[#20b858] text-white rounded-lg font-semibold text-lg flex items-center justify-center gap-2 transition-colors shadow-md"
                 >
-                  <ChatIcon size={24} />
+                  <WhatsAppIcon size={24} />
                   Enviar por WhatsApp
                 </button>
               </form>

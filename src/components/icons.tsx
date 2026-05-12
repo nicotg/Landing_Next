@@ -96,3 +96,17 @@ export const ClockIcon: React.FC<IconProps> = ({ size = 24, className }) => (
     <path d="M12 6v6l4 2" />
   </svg>
 );
+
+export const WhatsAppIcon: React.FC<IconProps> = ({ size = 24, className }) => (
+  <svg
+    width={size}
+    height={size}
+    className={className}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    fillRule="evenodd"
+    clipRule="evenodd"
+  >
+    <path d="M12 2.1c-5.5 0-10 4.5-10 10 0 1.8.5 3.5 1.3 5L2 22l5-1.3c1.5.8 3.2 1.3 5 1.3 5.5 0 10-4.5 10-10S17.5 2.1 12 2.1Zm-2.8 5.4c.2 0 .4 0 .5.4.2.4.6 1.5.7 1.6.1.1.1.3 0 .4l-.4.5c-.1.1-.2.2-.1.4.2.4.5 1 1.2 1.6.7.6 1.2.8 1.6 1 .2.1.3 0 .4-.1l.5-.6c.1-.2.3-.1.4-.1l1.5.7c.2.1.3.2.4.2.1.2 0 .9-.3 1.3-.3.4-.8.5-1.2.6-.4.1-.9.1-1.7-.1-.3-.1-.7-.2-1.4-.5-2.3-1-3.7-3-3.9-3.2-.1-.2-.9-1.1-.9-2.1 0-1 .5-1.5.7-1.7.2-.2.5-.3.6-.3Z" />
+  </svg>
+);

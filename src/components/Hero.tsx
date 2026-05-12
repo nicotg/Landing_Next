@@ -27,33 +27,27 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 px-6 md:px-16 w-full max-w-7xl mx-auto flex flex-col items-start text-left">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg flex flex-wrap items-baseline gap-x-3">
-          <span>Tu</span>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={wordIndex}
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -30, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="text-accent inline-block"
-            >
-              {dynamicWords[wordIndex]}
-            </motion.span>
-          </AnimatePresence>
-          <span>es nuestro enfoque</span>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
+          <span className="flex items-baseline gap-x-3">
+            <span>Tu</span>
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={wordIndex}
+                initial={{ y: 30, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -30, opacity: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="text-accent inline-block"
+              >
+                {dynamicWords[wordIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          <span className="block">es nuestro enfoque</span>
         </h1>
-        <p className="text-lg md:text-2xl text-light mb-10 max-w-xl drop-shadow-md font-light">
+        <p className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light">
           Descubrí la combinación perfecta entre salud visual y diseño exclusivo en el corazón de Córdoba.
         </p>
-        <div className="flex gap-4 flex-col sm:flex-row w-full sm:w-auto">
-          <button className="px-8 py-4 bg-primary text-white rounded-full font-medium text-lg transition-transform hover:scale-105 hover:bg-primary/90 shadow-xl cursor-pointer">
-            Conocé nuestros servicios
-          </button>
-          <button className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-full font-medium text-lg transition-all hover:bg-white/20 shadow-xl cursor-pointer">
-            Contactanos
-          </button>
-        </div>
       </div>
     </section>
   );

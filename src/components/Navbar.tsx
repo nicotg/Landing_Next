@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChatIcon } from './icons';
+import { WhatsAppIcon } from './icons';
 import logo from '../assets/Next-Logo-RGB-BlancoCompleto.png';
 
 export const Navbar: React.FC = () => {
@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Next Ópticas" className="h-8 md:h-10 object-contain" />
+          <img src={logo} alt="Next Ópticas" className="h-12 md:h-16 object-contain" />
         </div>
 
         {/* Links (Desktop) */}
@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
             href="#" 
             className="flex items-center gap-2 text-white hover:text-accent transition-colors"
           >
-            <ChatIcon size={24} />
+            <WhatsAppIcon size={24} />
             <span className="hidden md:block font-medium text-sm">Contactanos</span>
           </a>
         </div>
