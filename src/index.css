@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  
+  --color-primary: #0033A0;
+  --color-accent: #91D1F2;
+  --color-dark: #000000;
+  --color-light: #D9DDE3;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-white text-dark m-0 p-0 antialiased;
+  }
+}
+
+/* Utilidades adicionales o personalizadas si son necesarias */
+.glass-effect {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
