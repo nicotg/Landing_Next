@@ -11,7 +11,7 @@ WhatsApp.
 - **Vite 8** (dev server + bundler)
 - **Tailwind CSS v4** (con `@theme` para tokens de diseño)
 - **Framer Motion** (animación del hero)
-- **lucide-react** (íconos)
+- **SVG inline propios** (íconos en `src/components/icons.tsx`)
 
 ## Scripts
 
@@ -38,6 +38,7 @@ src/
     Brands.tsx                  Marcas + cards de tecnología
     Contact.tsx                 Form, info y mapa
     FloatingWhatsApp.tsx        Botón flotante de WhatsApp
+    icons.tsx                   SVG inline (ChatIcon, EyeIcon, ...)
 public/                         Favicon e íconos estáticos
 implementation_plan.md          Plan de la fase de diseño actual
 AGENTS.md                       Guía para agentes de IA
@@ -61,7 +62,7 @@ Para usarlos: `bg-primary`, `text-accent`, `border-light`, etc.
 
 - Textos en español rioplatense (vos / acercate / contactanos).
 - Componentes funcionales con `React.FC` y `export const`.
-- Íconos `lucide-react` con `strokeWidth={1.5}`.
+- Íconos como SVG inline en `src/components/icons.tsx` (`stroke="currentColor"`, `strokeWidth={1.5}`).
 - Imágenes importadas desde `src/assets/` para que las procese Vite.
 - Tailwind utility-first; nada de hex hardcodeados fuera del tema (excepción
   documentada: verde WhatsApp `#25D366`).

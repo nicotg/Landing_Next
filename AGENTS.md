@@ -6,7 +6,8 @@ que trabaje sobre este repositorio.
 ## Proyecto
 
 **Next Ópticas** — Landing page de una óptica en Córdoba (Argentina).
-Stack: React 19 + TypeScript + Vite + Tailwind CSS v4 + Framer Motion + lucide-react.
+Stack: React 19 + TypeScript + Vite + Tailwind CSS v4 + Framer Motion.
+Íconos como SVG inline propios en `src/components/icons.tsx` (sin librerías externas).
 
 ## Comandos
 
@@ -36,6 +37,7 @@ src/
     Brands.tsx         Marcas + cards de tecnología óptica
     Contact.tsx        Form + info + mapa embebido
     FloatingWhatsApp.tsx  CTA flotante bottom-right
+    icons.tsx          SVG inline (ChatIcon, EyeIcon, GlassesIcon, ...)
 public/                Favicon e íconos estáticos
 implementation_plan.md Plan de la fase actual (referencia)
 ```
@@ -54,7 +56,7 @@ implementation_plan.md Plan de la fase actual (referencia)
   específicos (ej. verde WhatsApp `#25D366`).
 - **Animaciones**: preferir `framer-motion` para transiciones de elementos;
   Tailwind `transition-*` para hover/scroll simples.
-- **Íconos**: `lucide-react` con `strokeWidth={1.5}` para coherencia visual.
+- **Íconos**: SVG inline en `src/components/icons.tsx`. Usar `stroke="currentColor"` y `strokeWidth={1.5}`. Si hace falta uno nuevo, agregarlo ahí (no instalar librerías de íconos).
 - **Imágenes**: importar desde `src/assets/` para que Vite las procese.
 - **Accesibilidad**: incluir `alt` en `<img>` y `aria-label` en CTAs sin texto.
 

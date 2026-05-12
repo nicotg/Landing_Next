@@ -16,36 +16,32 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative w-full h-screen min-h-[600px] flex items-center overflow-hidden pt-20">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImg} 
-          alt="Next Ópticas Hero" 
+        <img
+          src={heroImg}
+          alt="Next Ópticas Hero"
           className="w-full h-full object-cover"
         />
-        {/* Overlay para oscurecer la imagen y mejorar legibilidad */}
         <div className="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/50 to-transparent"></div>
       </div>
 
-      {/* Content aligned to left */}
       <div className="relative z-10 px-6 md:px-16 w-full max-w-7xl mx-auto flex flex-col items-start text-left">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg flex flex-col gap-2">
-          <span>Tu <span className="inline-block relative w-[250px] md:w-[350px] h-[1em]">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={wordIndex}
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -30, opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="absolute left-0 text-accent"
-              >
-                {dynamicWords[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </span>,</span>
-          <span>nuestro enfoque</span>
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg flex flex-wrap items-baseline gap-x-3">
+          <span>Tu</span>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={wordIndex}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -30, opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-accent inline-block"
+            >
+              {dynamicWords[wordIndex]}
+            </motion.span>
+          </AnimatePresence>
+          <span>es nuestro enfoque</span>
         </h1>
         <p className="text-lg md:text-2xl text-light mb-10 max-w-xl drop-shadow-md font-light">
           Descubrí la combinación perfecta entre salud visual y diseño exclusivo en el corazón de Córdoba.

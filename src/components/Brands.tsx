@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Zap, Droplets } from 'lucide-react';
+import { ShieldCheckIcon, BoltIcon, DropIcon } from './icons';
 
 const brands = [
   "Ray-Ban",
@@ -16,19 +16,19 @@ const technologies = [
   {
     name: "Transitions®",
     description: "Lentes inteligentes a la luz. Se oscurecen en exteriores y se aclaran en interiores para comodidad total.",
-    icon: Zap,
+    icon: BoltIcon,
     accent: "bg-blue-100 text-blue-700"
   },
   {
     name: "Crizal®",
     description: "Tratamiento superior antirreflejos que repele agua, polvo y protege contra los rayos UV.",
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     accent: "bg-emerald-100 text-emerald-700"
   },
   {
     name: "Varilux®",
     description: "Los lentes multifocales más avanzados para una visión nítida a cualquier distancia sin esfuerzo.",
-    icon: Droplets,
+    icon: DropIcon,
     accent: "bg-purple-100 text-purple-700"
   }
 ];
@@ -74,7 +74,7 @@ export const Brands: React.FC = () => {
                 className="bg-white p-10 rounded-3xl shadow-sm border border-light hover:shadow-2xl hover:border-accent/30 transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${tech.accent}`}>
-                  <Icon size={28} strokeWidth={1.5} />
+                  <Icon size={28} />
                 </div>
                 <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
                 <p className="text-gray-600 font-light leading-relaxed">

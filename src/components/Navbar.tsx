@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { ChatIcon } from './icons';
 import logo from '../assets/Next-Logo-RGB-BlancoCompleto.png';
 
 export const Navbar: React.FC = () => {
@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
             href="#" 
             className="flex items-center gap-2 text-white hover:text-accent transition-colors"
           >
-            <MessageCircle size={24} strokeWidth={1.5} />
+            <ChatIcon size={24} />
             <span className="hidden md:block font-medium text-sm">Contactanos</span>
           </a>
         </div>
