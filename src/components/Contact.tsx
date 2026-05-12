@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Clock, MessageCircle } from 'lucide-react';
+import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon } from './icons';
 
 export const Contact: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ export const Contact: React.FC = () => {
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-primary flex-shrink-0">
-                    <MapPin size={24} />
+                    <PinIcon size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-dark text-lg">Ubicación</h4>
@@ -35,7 +35,7 @@ export const Contact: React.FC = () => {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-primary flex-shrink-0">
-                    <Phone size={24} />
+                    <PhoneIcon size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-dark text-lg">Teléfono / WhatsApp</h4>
@@ -45,7 +45,7 @@ export const Contact: React.FC = () => {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-primary flex-shrink-0">
-                    <Clock size={24} />
+                    <ClockIcon size={24} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-dark text-lg">Horarios</h4>
@@ -83,7 +83,7 @@ export const Contact: React.FC = () => {
                   type="button"
                   className="w-full py-4 bg-[#25D366] hover:bg-[#20b858] text-white rounded-lg font-semibold text-lg flex items-center justify-center gap-2 transition-colors shadow-md"
                 >
-                  <MessageCircle size={24} />
+                  <WhatsAppIcon size={24} />
                   Enviar por WhatsApp
                 </button>
               </form>

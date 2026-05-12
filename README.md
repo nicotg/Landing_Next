@@ -1,16 +1,73 @@
-# React + Vite
+# Next Ópticas — Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio de presentación de **Next Ópticas**, una óptica de Córdoba (Argentina).
+Diseño moderno con navbar transparente, hero animado, mosaico asimétrico de
+servicios, marcas y tecnología óptica, formulario de contacto y CTA flotante a
+WhatsApp.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript**
+- **Vite 8** (dev server + bundler)
+- **Tailwind CSS v4** (con `@theme` para tokens de diseño)
+- **Framer Motion** (animación del hero)
+- **SVG inline propios** (íconos en `src/components/icons.tsx`)
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install        # instalar dependencias
+npm run dev        # servidor de desarrollo (http://localhost:5173)
+npm run build      # build de producción → dist/
+npm run preview    # servir el build local
+npm run lint       # ESLint
+```
 
-## Expanding the ESLint configuration
+## Estructura
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+  App.tsx                       Composición de secciones
+  main.tsx                      Entry point
+  index.css                     Tailwind + tokens de tema
+  assets/                       Logos e imágenes
+  components/
+    Navbar.tsx                  Nav fijo con glass on scroll
+    Hero.tsx                    Hero con palabra rotativa
+    Services.tsx                Mosaico de servicios
+    Brands.tsx                  Marcas + cards de tecnología
+    Contact.tsx                 Form, info y mapa
+    FloatingWhatsApp.tsx        Botón flotante de WhatsApp
+    icons.tsx                   SVG inline (ChatIcon, EyeIcon, ...)
+public/                         Favicon e íconos estáticos
+implementation_plan.md          Plan de la fase de diseño actual
+AGENTS.md                       Guía para agentes de IA
+```
+
+## Tema de diseño
+
+Definido en `src/index.css` con la directiva `@theme` de Tailwind v4:
+
+| Token              | Valor       | Uso                        |
+|--------------------|-------------|----------------------------|
+| `--color-primary`  | `#0033A0`   | Azul institucional Next    |
+| `--color-accent`   | `#91D1F2`   | Celeste de acento          |
+| `--color-dark`     | `#000000`   | Texto y fondos oscuros     |
+| `--color-light`    | `#D9DDE3`   | Grises claros, bordes      |
+| `--font-sans`      | `Outfit`    | Tipografía base            |
+
+Para usarlos: `bg-primary`, `text-accent`, `border-light`, etc.
+
+## Convenciones
+
+- Textos en español rioplatense (vos / acercate / contactanos).
+- Componentes funcionales con `React.FC` y `export const`.
+- Íconos como SVG inline en `src/components/icons.tsx` (`stroke="currentColor"`, `strokeWidth={1.5}`).
+- Imágenes importadas desde `src/assets/` para que las procese Vite.
+- Tailwind utility-first; nada de hex hardcodeados fuera del tema (excepción
+  documentada: verde WhatsApp `#25D366`).
+
+## Próximos pasos
+
+Ver `implementation_plan.md` para el detalle de la fase de refinamiento de
+diseño en curso.

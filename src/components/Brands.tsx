@@ -1,5 +1,5 @@
-import React from 'react';
-import { ShieldCheck, Zap, Droplets } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const brands = [
   "Ray-Ban",
@@ -14,31 +14,68 @@ const brands = [
 
 const technologies = [
   {
-    name: "Transitions®",
-    description: "Lentes inteligentes a la luz. Se oscurecen en exteriores y se aclaran en interiores para comodidad total.",
-    icon: Zap,
-    accent: "bg-blue-100 text-blue-700"
+    name: "Progresivos Custom",
+    category: "Progresivos",
+    description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
   },
   {
-    name: "Crizal®",
-    description: "Tratamiento superior antirreflejos que repele agua, polvo y protege contra los rayos UV.",
-    icon: ShieldCheck,
-    accent: "bg-emerald-100 text-emerald-700"
+    name: "Polarys",
+    category: "Polarizado",
+    description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
   },
   {
-    name: "Varilux®",
-    description: "Los lentes multifocales más avanzados para una visión nítida a cualquier distancia sin esfuerzo.",
-    icon: Droplets,
-    accent: "bg-purple-100 text-purple-700"
-  }
+    name: "Prolayer",
+    category: "Antirreflejo",
+    description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
+  },
+  {
+    name: "Minux",
+    category: "Antirreflejo",
+    description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
+  },
+  {
+    name: "Arsion",
+    category: "Antirreflejo",
+    description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
+  },
 ];
 
+const AUTOPLAY_MS = 5000;
+
 export const Brands: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    const update = () => {
+      if (window.matchMedia('(min-width: 1024px)').matches) setVisibleCount(3);
+      else if (window.matchMedia('(min-width: 768px)').matches) setVisibleCount(2);
+      else setVisibleCount(1);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const maxIndex = Math.max(0, technologies.length - visibleCount);
+
+  useEffect(() => {
+    setCurrentIndex((i) => Math.min(i, maxIndex));
+  }, [maxIndex]);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setInterval(() => {
+      setCurrentIndex((i) => (i >= maxIndex ? 0 : i + 1));
+    }, AUTOPLAY_MS);
+    return () => clearInterval(t);
+  }, [paused, maxIndex]);
+
   return (
     <section id="marcas" className="py-24 bg-light/30">
       <div className="max-w-7xl mx-auto px-6">
-        
-        {/* Marcas de Anteojos (Estilo Minimalista) */}
+
         <div className="text-center mb-20">
           <p className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10">
             Trabajamos con las mejores marcas de armazones
@@ -54,10 +91,8 @@ export const Brands: React.FC = () => {
           </div>
         </div>
 
-        {/* Separador */}
         <div className="w-full h-px bg-light/80 mb-20"></div>
 
-        {/* Tecnología Óptica (Cards Premium) */}
         <div className="text-center mb-12">
           <h3 className="text-3xl md:text-4xl font-bold text-dark mb-4">Tecnología Óptica de Vanguardia</h3>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
@@ -65,24 +100,47 @@ export const Brands: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {technologies.map((tech, idx) => {
-            const Icon = tech.icon;
-            return (
-              <div 
-                key={idx} 
-                className="bg-white p-10 rounded-3xl shadow-sm border border-light hover:shadow-2xl hover:border-accent/30 transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${tech.accent}`}>
-                  <Icon size={28} strokeWidth={1.5} />
+        <div
+          className="overflow-hidden"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <motion.div
+            className="flex"
+            animate={{ x: `-${currentIndex * (100 / visibleCount)}%` }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {technologies.map((tech, idx) => (
+              <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
+                <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
+                  {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
+                  <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
+                    <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
+                  </div>
+                  <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
+                    {tech.category}
+                  </span>
+                  <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
+                  <p className="text-gray-600 font-light leading-relaxed">
+                    {tech.description}
+                  </p>
                 </div>
-                <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
-                <p className="text-gray-600 font-light leading-relaxed">
-                  {tech.description}
-                </p>
               </div>
-            );
-          })}
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-10">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                i === currentIndex ? 'w-10 bg-primary' : 'w-2 bg-light hover:bg-primary/40'
+              }`}
+              aria-label={`Ir al slide ${i + 1}`}
+            />
+          ))}
         </div>
 
       </div>

@@ -1,32 +1,32 @@
 import React from 'react';
-import { Eye, Glasses, Sun, CircleDot } from 'lucide-react';
+import { EyeIcon, GlassesIcon, SunIcon, LensIcon } from './icons';
 
 const servicesList = [
   {
     title: 'Examen Visual',
     description: 'Tecnología de última generación para tu salud ocular.',
-    icon: Eye,
+    icon: EyeIcon,
     image: 'https://images.unsplash.com/photo-1579208035882-bf5422830f36?auto=format&fit=crop&w=800&q=80',
     className: 'md:col-span-2 md:row-span-2 min-h-[350px] md:min-h-[500px]',
   },
   {
     title: 'Anteojos de Receta',
     description: 'Diseños exclusivos adaptados a vos.',
-    icon: Glasses,
+    icon: GlassesIcon,
     image: 'https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=600&q=80',
     className: 'col-span-1 min-h-[250px]',
   },
   {
     title: 'Lentes de Contacto',
     description: 'Adaptación personalizada y confort.',
-    icon: CircleDot,
+    icon: LensIcon,
     image: 'https://images.unsplash.com/photo-1614583224978-f05ce51ef5fa?auto=format&fit=crop&w=600&q=80',
     className: 'col-span-1 min-h-[250px]',
   },
   {
     title: 'Gafas de Sol',
     description: 'Protección UV superior y estilo inigualable.',
-    icon: Sun,
+    icon: SunIcon,
     image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80',
     className: 'md:col-span-2 min-h-[250px]',
   },
@@ -63,7 +63,7 @@ export const Services: React.FC = () => {
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                     <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 text-white">
-                      <Icon size={24} strokeWidth={1.5} />
+                      <Icon size={24} />
                     </div>
                     <h4 className="text-2xl font-bold text-white mb-2">{service.title}</h4>
                     <p className="text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-light delay-75">
