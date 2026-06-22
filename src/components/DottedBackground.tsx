@@ -1,15 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 
 const SPACING = 36;
-const INFLUENCE_RADIUS = 180;
-const BASE_SIZE = 1.4;
-const MAX_SIZE = 4;
-const BASE_ALPHA = 0.20;
-const MAX_ALPHA = 0.85;
-// Slate-900 (#0f172a): casi negro con leve tinte azul
-const COLOR_R = 15;
-const COLOR_G = 23;
-const COLOR_B = 42;
+const INFLUENCE_RADIUS = 200;
+const BASE_SIZE = 1.1;
+const MAX_SIZE = 3.5;
+const BASE_ALPHA = 0.22;
+const MAX_ALPHA = 1;
+const PULL_STRENGTH = 0.18;
+const MAX_GLOW = 14;
+// Accent #91D1F2 → rgb(145, 209, 242). Color claro para que se vea sobre fondo oscuro.
+const COLOR_R = 145;
+const COLOR_G = 209;
+const COLOR_B = 242;
 
 type Dot = { baseX: number; baseY: number };
 
@@ -41,7 +43,6 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
       const rect = container.getBoundingClientRect();
       width = rect.width;
       height = rect.height;
-      // Capear DPR a 2 para no penalizar performance en pantallas hi-DPI
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       canvas.width = Math.floor(width * dpr);
@@ -67,6 +68,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
 
     const drawStatic = () => {
       ctx.clearRect(0, 0, width, height);
+      ctx.shadowBlur = 0;
       ctx.fillStyle = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, ${BASE_ALPHA})`;
       for (const dot of dots) {
         ctx.beginPath();
@@ -78,11 +80,12 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
     const drawAnimated = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Suavizado: el "current" interpola hacia el "target" cada frame
+      // Smoothing: el cursor que ve el canvas interpola hacia el real
       current.x += (target.x - current.x) * 0.2;
       current.y += (target.y - current.y) * 0.2;
 
       const r2 = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
+      ctx.shadowColor = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, 1)`;
 
       for (const dot of dots) {
         const dx = current.x - dot.baseX;
@@ -91,6 +94,9 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
 
         let size = BASE_SIZE;
         let alpha = BASE_ALPHA;
+        let drawX = dot.baseX;
+        let drawY = dot.baseY;
+        let glow = 0;
 
         if (d2 < r2) {
           const dist = Math.sqrt(d2);
@@ -98,10 +104,14 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
           const eased = t * t;
           size = BASE_SIZE + eased * (MAX_SIZE - BASE_SIZE);
           alpha = BASE_ALPHA + eased * (MAX_ALPHA - BASE_ALPHA);
+          drawX += dx * PULL_STRENGTH * eased;
+          drawY += dy * PULL_STRENGTH * eased;
+          glow = eased * MAX_GLOW;
         }
 
+        ctx.shadowBlur = glow;
         ctx.beginPath();
-        ctx.arc(dot.baseX, dot.baseY, size, 0, Math.PI * 2);
+        ctx.arc(drawX, drawY, size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, ${alpha})`;
         ctx.fill();
       }
