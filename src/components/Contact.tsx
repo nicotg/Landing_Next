@@ -1,5 +1,5 @@
 import React from 'react';
-import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon } from './icons';
+import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export const Contact: React.FC = () => {
   return (
@@ -53,6 +53,21 @@ export const Contact: React.FC = () => {
                     <p className="text-gray-600">Sáb: 9:00 - 13:00</p>
                   </div>
                 </div>
+
+                <a
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-primary flex-shrink-0 group-hover:bg-accent/40 transition-colors">
+                    <InstagramIcon size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-dark text-lg group-hover:text-primary transition-colors">Instagram</h4>
+                    <p className="text-gray-600">@nextopticas</p>
+                  </div>
+                </a>
               </div>
             </div>
 
