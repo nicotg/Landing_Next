@@ -42,6 +42,16 @@ const technologies = [
 
 const AUTOPLAY_MS = 5000;
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
 export const Brands: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
@@ -77,30 +87,56 @@ export const Brands: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-20">
-          <p className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10"
+          >
             Trabajamos con las mejores marcas de armazones
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+          </motion.p>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
+          >
             {brands.map((brand, idx) => (
-              <div key={idx} className="flex items-center justify-center p-4">
+              <motion.div
+                key={idx}
+                variants={fadeUp}
+                className="flex items-center justify-center p-4"
+              >
                 <span className="text-2xl md:text-3xl font-bold tracking-tighter text-dark/80 hover:text-primary transition-colors cursor-default select-none">
                   {brand}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <div className="w-full h-px bg-light/80 mb-20"></div>
 
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-12"
+        >
           <h3 className="text-3xl md:text-4xl font-bold text-dark mb-4">Tecnología Óptica de Vanguardia</h3>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
             Incorporamos los mejores tratamientos y materiales del mundo para cuidar tu visión con la máxima precisión.
           </p>
-        </div>
+        </motion.div>
 
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="overflow-hidden"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
@@ -128,7 +164,7 @@ export const Brands: React.FC = () => {
               </div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
 
         <div className="flex justify-center gap-2 mt-10">
           {Array.from({ length: maxIndex + 1 }).map((_, i) => (

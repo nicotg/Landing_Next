@@ -27,7 +27,12 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="relative z-10 px-6 md:px-16 w-full max-w-7xl mx-auto flex flex-col items-start text-left">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-lg"
+        >
           <span className="flex items-baseline gap-x-3">
             <span>Tu</span>
             <AnimatePresence mode="popLayout" initial={false}>
@@ -44,10 +49,15 @@ export const Hero: React.FC = () => {
             </AnimatePresence>
           </span>
           <span className="block">es nuestro enfoque</span>
-        </h1>
-        <p className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light"
+        >
           Descubrí la combinación perfecta entre salud visual y diseño exclusivo en el corazón de Córdoba.
-        </p>
+        </motion.p>
       </div>
     </section>
   );

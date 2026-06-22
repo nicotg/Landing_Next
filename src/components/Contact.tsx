@@ -1,18 +1,30 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
 export const Contact: React.FC = () => {
   return (
     <section className="py-24 bg-light/20 relative">
       <div className="max-w-6xl mx-auto px-6">
-        
-        <div className="text-center mb-16">
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl font-bold text-dark mb-4">Contacto</h2>
           <div className="w-16 h-1 bg-accent mx-auto rounded-full"></div>
-        </div>
+        </motion.div>
 
-        {/* Card Container */}
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="bg-white rounded-3xl shadow-xl overflow-hidden mb-12"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2">
             
             {/* Left Side: Info */}
@@ -104,10 +116,15 @@ export const Contact: React.FC = () => {
               </form>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Bottom Side: Map */}
-        <div className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10"
+        >
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108924.9602334863!2d-64.26917631379513!3d-31.399434857413645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432985f478f5b69%3A0xb0a24f9a5366b092!2zQ8OzcmRvYmE!5e0!3m2!1ses-419!2sar!4v1715535041000!5m2!1ses-419!2sar" 
             width="100%" 
@@ -118,7 +135,7 @@ export const Contact: React.FC = () => {
             referrerPolicy="no-referrer-when-downgrade"
             title="Ubicación en el mapa"
           ></iframe>
-        </div>
+        </motion.div>
 
       </div>
     </section>
