@@ -27,7 +27,7 @@ const chapters: ChapterData[] = [
     description: 'Examen visual completo: agudeza, salud ocular y fondo de ojo en un mismo turno.',
     align: 'left',
     enterFrom: { x: -80, y: 40 },
-    exitTo: { x: -80, y: -40 },
+    exitTo: { x: 0, y: -40 },
   },
   {
     eyebrow: '02 — Asesoramos',
@@ -35,7 +35,7 @@ const chapters: ChapterData[] = [
     description: 'Más de 30 marcas, prueba sin compromiso y asesoramiento personalizado de principio a fin.',
     align: 'right',
     enterFrom: { x: 120, y: 40 },
-    exitTo: { x: 120, y: -40 },
+    exitTo: { x: 0, y: -40 },
   },
   {
     eyebrow: '03 — Diseñamos',
@@ -43,7 +43,7 @@ const chapters: ChapterData[] = [
     description: 'Progresivos, polarizados y antirreflejo de las mejores marcas, calibrados a tu uso diario.',
     align: 'left',
     enterFrom: { x: -80, y: 40 },
-    exitTo: { x: -80, y: -40 },
+    exitTo: { x: 0, y: -40 },
   },
 ];
 
