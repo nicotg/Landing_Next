@@ -1,121 +1,51 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 import heroImg from '../assets/foto_ejemplo_hero.jpg';
 
-const chapters = [
+type Align = 'left' | 'right';
+
+type ChapterData = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  align: Align;
+  enterFrom: { x: number; y: number };
+  exitTo: { x: number; y: number };
+};
+
+const chapters: ChapterData[] = [
   {
     eyebrow: '01 — Examinamos',
     title: 'Diagnosticamos tu visión con la mejor tecnología.',
     description: 'Examen visual completo: agudeza, salud ocular y fondo de ojo en un mismo turno.',
+    align: 'left',
+    enterFrom: { x: -80, y: 40 },
+    exitTo: { x: -80, y: -40 },
   },
   {
     eyebrow: '02 — Asesoramos',
     title: 'Encontramos los anteojos que reflejan quién sos.',
     description: 'Más de 30 marcas, prueba sin compromiso y asesoramiento personalizado de principio a fin.',
+    align: 'right',
+    enterFrom: { x: 120, y: 40 },
+    exitTo: { x: 120, y: -40 },
   },
   {
     eyebrow: '03 — Diseñamos',
     title: 'Cristales hechos a tu medida.',
     description: 'Progresivos, polarizados y antirreflejo de las mejores marcas, calibrados a tu uso diario.',
+    align: 'left',
+    enterFrom: { x: -80, y: 40 },
+    exitTo: { x: -80, y: -40 },
   },
 ];
-
-// WAAPI exige que los offsets estén dentro de [0,1] y sean monotonically
-// non-decreasing. Por eso el primer chapter arranca visible (sin fade-in) y
-// el último termina visible (sin fade-out): cada uno usa su propio array de
-// keyframes.
-// Plateaus generosos (≈ 28/22/26% del scroll) sobre un hero de 700vh para
-// que cada chapter se pueda leer cómodamente. Todo dentro de [0,1] (WAAPI).
-// Cada chapter puede animar x o y por separado.
-type ChapterTransform = {
-  opacityRange: number[];
-  opacityOutput: number[];
-  xRange?: number[];
-  xOutput?: number[];
-  yRange?: number[];
-  yOutput?: number[];
-};
-
-const chapterTransforms: ChapterTransform[] = [
-  // 01 — estático, fade out hacia arriba
-  {
-    opacityRange: [0, 0.25, 0.30],
-    opacityOutput: [1, 1, 0],
-    yRange: [0, 0.25, 0.30],
-    yOutput: [0, 0, -40],
-  },
-  // 02 — entra diagonal desde abajo-derecha, sale hacia arriba-izquierda
-  {
-    opacityRange: [0.30, 0.35, 0.55, 0.60],
-    opacityOutput: [0, 1, 1, 0],
-    xRange: [0.30, 0.35, 0.55, 0.60],
-    xOutput: [240, 0, 0, -160],
-    yRange: [0.30, 0.35, 0.55, 0.60],
-    yOutput: [140, 0, 0, -60],
-  },
-  // 03 — entra desde abajo, plateau largo, fade out al final del scroll
-  {
-    opacityRange: [0.60, 0.65, 0.93, 0.98],
-    opacityOutput: [0, 1, 1, 0],
-    yRange: [0.60, 0.65, 0.93, 0.98],
-    yOutput: [60, 0, 0, -40],
-  },
-];
-
-const Chapter: React.FC<{
-  chapter: typeof chapters[number];
-  transforms: ChapterTransform;
-  scrollYProgress: MotionValue<number>;
-}> = ({ chapter, transforms, scrollYProgress }) => {
-  const opacity = useTransform(scrollYProgress, transforms.opacityRange, transforms.opacityOutput);
-  const x = useTransform(
-    scrollYProgress,
-    transforms.xRange ?? [0, 1],
-    transforms.xOutput ?? [0, 0],
-  );
-  const y = useTransform(
-    scrollYProgress,
-    transforms.yRange ?? [0, 1],
-    transforms.yOutput ?? [0, 0],
-  );
-
-  return (
-    <motion.div
-      style={{ opacity, x, y }}
-      className="absolute inset-0 flex flex-col justify-center"
-    >
-      <div className="px-6 md:px-16 max-w-7xl mx-auto w-full">
-        <span className="block text-accent text-sm md:text-base font-semibold tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
-          {chapter.eyebrow}
-        </span>
-        <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 max-w-4xl drop-shadow-lg tracking-tight leading-[1.05]">
-          {chapter.title}
-        </h2>
-        <p className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed">
-          {chapter.description}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
-
-const ChapterDot: React.FC<{
-  index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}> = ({ index, total, scrollYProgress }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
-  return (
-    <div className="w-10 md:w-16 h-[3px] bg-white/25 rounded-full overflow-hidden">
-      <motion.div
-        style={{ scaleX, transformOrigin: 'left' }}
-        className="h-full bg-accent rounded-full"
-      />
-    </div>
-  );
-};
 
 export const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
@@ -124,11 +54,22 @@ export const Hero: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const idx = Math.min(chapters.length - 1, Math.max(0, Math.floor(latest * chapters.length)));
+    setActiveIdx(idx);
+  });
+
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
+  const chapter = chapters[activeIdx];
+  const justify = chapter.align === 'right' ? 'justify-end' : 'justify-start';
+  const textAlign = chapter.align === 'right' ? 'text-right' : 'text-left';
+
   return (
-    <section id="hero" ref={ref} className="relative h-[700vh]">
+    <section id="hero" ref={ref} className="relative h-[400vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
@@ -137,18 +78,36 @@ export const Hero: React.FC = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/50 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/85"></div>
         </motion.div>
 
-        <div className="relative z-10 h-full w-full pt-20">
-          {chapters.map((chapter, idx) => (
-            <Chapter
-              key={idx}
-              chapter={chapter}
-              transforms={chapterTransforms[idx]}
-              scrollYProgress={scrollYProgress}
-            />
-          ))}
+        <div className="relative z-10 h-full w-full pt-20 flex items-center">
+          <div className={`w-full px-6 md:px-16 max-w-7xl mx-auto flex ${justify}`}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIdx}
+                initial={{ opacity: 0, x: chapter.enterFrom.x, y: chapter.enterFrom.y }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: chapter.exitTo.x, y: chapter.exitTo.y }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className={`max-w-3xl ${textAlign}`}
+              >
+                <span className="block text-accent text-sm md:text-base font-semibold tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
+                  {chapter.eyebrow}
+                </span>
+                <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg tracking-tight leading-[1.05]">
+                  {chapter.title}
+                </h2>
+                <p
+                  className={`text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed ${
+                    chapter.align === 'right' ? 'ml-auto' : ''
+                  }`}
+                >
+                  {chapter.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         <div className="absolute bottom-10 md:bottom-14 left-0 right-0 z-20 pointer-events-none">
@@ -173,5 +132,23 @@ export const Hero: React.FC = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const ChapterDot: React.FC<{
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}> = ({ index, total, scrollYProgress }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+  return (
+    <div className="w-10 md:w-16 h-[3px] bg-white/25 rounded-full overflow-hidden">
+      <motion.div
+        style={{ scaleX, transformOrigin: 'left' }}
+        className="h-full bg-accent rounded-full"
+      />
+    </div>
   );
 };
