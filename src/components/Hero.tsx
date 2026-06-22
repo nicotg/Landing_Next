@@ -39,24 +39,26 @@ type ChapterTransform = {
 const chapterTransforms: ChapterTransform[] = [
   // 01 — estático, fade out hacia arriba
   {
-    opacityRange: [0, 0.28, 0.34],
+    opacityRange: [0, 0.25, 0.30],
     opacityOutput: [1, 1, 0],
-    yRange: [0, 0.28, 0.34],
+    yRange: [0, 0.25, 0.30],
     yOutput: [0, 0, -40],
   },
-  // 02 — entra desde la derecha, sale hacia la izquierda
+  // 02 — entra diagonal desde abajo-derecha, sale hacia arriba-izquierda
   {
-    opacityRange: [0.34, 0.40, 0.62, 0.68],
+    opacityRange: [0.30, 0.35, 0.55, 0.60],
     opacityOutput: [0, 1, 1, 0],
-    xRange: [0.34, 0.40, 0.62, 0.68],
-    xOutput: [220, 0, 0, -180],
+    xRange: [0.30, 0.35, 0.55, 0.60],
+    xOutput: [240, 0, 0, -160],
+    yRange: [0.30, 0.35, 0.55, 0.60],
+    yOutput: [140, 0, 0, -60],
   },
-  // 03 — entra desde abajo
+  // 03 — entra desde abajo, plateau largo, fade out al final del scroll
   {
-    opacityRange: [0.68, 0.74, 1],
-    opacityOutput: [0, 1, 1],
-    yRange: [0.68, 0.74, 1],
-    yOutput: [40, 0, 0],
+    opacityRange: [0.60, 0.65, 0.93, 0.98],
+    opacityOutput: [0, 1, 1, 0],
+    yRange: [0.60, 0.65, 0.93, 0.98],
+    yOutput: [60, 0, 0, -40],
   },
 ];
 
