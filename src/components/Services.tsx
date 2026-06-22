@@ -64,7 +64,10 @@ export const Services: React.FC = () => {
 
   const service = services[activeIdx];
   const Icon = service.Icon;
-  const isReversed = activeIdx % 2 === 1;
+  const isRight = activeIdx % 2 === 1;
+  const blockAlign = isRight ? 'md:ml-auto md:mr-0' : 'md:mr-auto md:ml-0';
+  const textAlign = isRight ? 'md:text-right' : 'md:text-left';
+  const rowDirection = isRight ? 'md:flex-row-reverse' : 'md:flex-row';
 
   return (
     <section id="servicios" ref={ref} className="relative bg-white h-[400vh]">
@@ -90,9 +93,10 @@ export const Services: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className={`max-w-3xl mx-auto text-center ${blockAlign} ${textAlign}`}
               >
                 {/* Título del servicio (arriba) */}
-                <div className="text-center mb-8 md:mb-12">
+                <div className="mb-8 md:mb-10">
                   <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
                     {service.number} / {String(services.length).padStart(2, '0')}
                   </span>
@@ -101,17 +105,15 @@ export const Services: React.FC = () => {
                   </h4>
                 </div>
 
-                {/* Silueta + descripción lado a lado (alternando L/R por servicio) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                  <div className={`flex justify-center ${isReversed ? 'md:order-2' : ''}`}>
+                {/* Silueta + descripción lado a lado (silueta queda hacia el borde exterior) */}
+                <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
+                  <div className="shrink-0 text-primary/85">
                     {/* Placeholder de silueta - reemplazar por <img src={service.image} /> cuando estén los PNGs */}
-                    <Icon className="w-[150px] h-[150px] md:w-[240px] md:h-[240px] text-primary/85" />
+                    <Icon className="w-[140px] h-[140px] md:w-[200px] md:h-[200px]" />
                   </div>
-                  <div className={`flex justify-center ${isReversed ? 'md:order-1' : ''}`}>
-                    <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md text-center md:text-left">
-                      {service.description}
-                    </p>
-                  </div>
+                  <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
+                    {service.description}
+                  </p>
                 </div>
               </motion.div>
             </AnimatePresence>
