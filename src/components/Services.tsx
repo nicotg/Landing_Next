@@ -8,6 +8,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { EyeIcon, GlassesIcon, LensIcon, SunIcon } from './icons';
+import { DottedBackground } from './DottedBackground';
 
 type IconComponent = React.FC<{ size?: number; className?: string }>;
 
@@ -71,69 +72,73 @@ export const Services: React.FC = () => {
 
   return (
     <section id="servicios" ref={ref} className="relative bg-white h-[400vh]">
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
+      <div className="sticky top-0 h-screen overflow-hidden">
+        <DottedBackground />
 
-        {/* Texto fijo centrado arriba */}
-        <div className="pt-24 md:pt-28 text-center px-6">
-          <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
-            Especialidades
-          </h2>
-          <h3 className="text-4xl md:text-6xl font-bold text-dark leading-[1.05] tracking-tight">
-            ¿Qué Ofrecemos?
-          </h3>
-        </div>
+        <div className="relative z-10 h-full flex flex-col">
 
-        {/* Servicio activo */}
-        <div className="flex-1 flex items-center px-6 md:px-16">
-          <div className="w-full max-w-6xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIdx}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -40 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className={`max-w-3xl mx-auto text-center ${blockAlign} ${textAlign}`}
-              >
-                {/* Título del servicio (arriba) */}
-                <div className="mb-8 md:mb-10">
-                  <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
-                    {service.number} / {String(services.length).padStart(2, '0')}
-                  </span>
-                  <h4 className="text-3xl md:text-5xl font-bold text-dark tracking-tight">
-                    {service.title}
-                  </h4>
-                </div>
+          {/* Texto fijo centrado arriba */}
+          <div className="pt-24 md:pt-28 text-center px-6">
+            <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
+              Especialidades
+            </h2>
+            <h3 className="text-4xl md:text-6xl font-bold text-dark leading-[1.05] tracking-tight">
+              ¿Qué Ofrecemos?
+            </h3>
+          </div>
 
-                {/* Silueta + descripción lado a lado (silueta queda hacia el borde exterior) */}
-                <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
-                  <div className="shrink-0 text-primary/85">
-                    {/* Placeholder de silueta - reemplazar por <img src={service.image} /> cuando estén los PNGs */}
-                    <Icon className="w-[140px] h-[140px] md:w-[200px] md:h-[200px]" />
+          {/* Servicio activo */}
+          <div className="flex-1 flex items-center px-6 md:px-16">
+            <div className="w-full max-w-6xl mx-auto">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIdx}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -40 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  className={`max-w-3xl mx-auto text-center ${blockAlign} ${textAlign}`}
+                >
+                  {/* Título del servicio (arriba) */}
+                  <div className="mb-8 md:mb-10">
+                    <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
+                      {service.number} / {String(services.length).padStart(2, '0')}
+                    </span>
+                    <h4 className="text-3xl md:text-5xl font-bold text-dark tracking-tight">
+                      {service.title}
+                    </h4>
                   </div>
-                  <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
-                    {service.description}
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
 
-        {/* Dots de progreso abajo */}
-        <div className="pb-10 px-6">
-          <div className="flex items-center justify-center gap-2">
-            {services.map((_, i) => (
-              <ServiceDot
-                key={i}
-                index={i}
-                total={services.length}
-                scrollYProgress={scrollYProgress}
-              />
-            ))}
+                  {/* Silueta + descripción lado a lado (silueta queda hacia el borde exterior) */}
+                  <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
+                    <div className="shrink-0 text-primary/85">
+                      {/* Placeholder de silueta - reemplazar por <img src={service.image} /> cuando estén los PNGs */}
+                      <Icon className="w-[140px] h-[140px] md:w-[200px] md:h-[200px]" />
+                    </div>
+                    <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
+                      {service.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
-        </div>
 
+          {/* Dots de progreso abajo */}
+          <div className="pb-10 px-6">
+            <div className="flex items-center justify-center gap-2">
+              {services.map((_, i) => (
+                <ServiceDot
+                  key={i}
+                  index={i}
+                  total={services.length}
+                  scrollYProgress={scrollYProgress}
+                />
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );
