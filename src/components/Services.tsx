@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import {
+  cubicBezier,
   motion,
   useScroll,
   useTransform,
@@ -57,14 +58,24 @@ export const Services: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
-  // El track se traslada continuamente con el scroll. Cada slide ocupa 100%
-  // de la altura del slider area, así que para mostrar el último hay que
-  // mover -(N-1) * 100%. Eso da la sensación de "scroll real" sin opacity.
+  // Patrón plateau-transition: cada slide queda quieto buena parte del scroll
+  // y la transición al siguiente es corta y suave (cubic-bezier easeInOut).
+  // Da sensación de permanencia sin perder fluidez.
   const trackY = useTransform(
     scrollYProgress,
-    [0, 1],
-    ['0%', `-${(services.length - 1) * 100}%`]
+    [0, 0.18, 0.28, 0.44, 0.54, 0.70, 0.80, 1],
+    ['0%', '0%', '-100%', '-100%', '-200%', '-200%', '-300%', '-300%'],
+    { ease: cubicBezier(0.65, 0, 0.35, 1) }
   );
+
+  // Mask gradient: difumina los bordes superior e inferior del slider para
+  // que el contenido se "diluya" al entrar/salir, sin tocar la opacity.
+  const maskStyle = {
+    WebkitMaskImage:
+      'linear-gradient(to bottom, transparent 0%, black 9%, black 91%, transparent 100%)',
+    maskImage:
+      'linear-gradient(to bottom, transparent 0%, black 9%, black 91%, transparent 100%)',
+  };
 
   return (
     <section id="servicios" ref={ref} className="relative bg-dark h-[700vh]">
@@ -84,7 +95,7 @@ export const Services: React.FC = () => {
           </div>
 
           {/* Slider vertical (scroll-driven, continuo) */}
-          <div className="flex-1 relative overflow-hidden">
+          <div className="flex-1 relative overflow-hidden" style={maskStyle}>
             <motion.div
               style={{ y: trackY }}
               className="absolute inset-0 flex flex-col"
