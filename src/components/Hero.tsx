@@ -24,6 +24,8 @@ const chapters = [
 // non-decreasing. Por eso el primer chapter arranca visible (sin fade-in) y
 // el último termina visible (sin fade-out): cada uno usa su propio array de
 // keyframes.
+// Plateaus largos para dar tiempo de lectura (≈ 30/24/30% del scroll cada uno),
+// con fades cortos (≈ 5%) entre chapters. Todo dentro de [0,1] (WAAPI).
 const chapterTransforms: {
   opacityRange: number[];
   opacityOutput: number[];
@@ -31,21 +33,21 @@ const chapterTransforms: {
   yOutput: number[];
 }[] = [
   {
-    opacityRange: [0, 0.28, 0.35],
+    opacityRange: [0, 0.30, 0.35],
     opacityOutput: [1, 1, 0],
-    yRange: [0, 0.28, 0.35],
+    yRange: [0, 0.30, 0.35],
     yOutput: [0, 0, -40],
   },
   {
-    opacityRange: [0.32, 0.40, 0.60, 0.68],
+    opacityRange: [0.35, 0.40, 0.62, 0.67],
     opacityOutput: [0, 1, 1, 0],
-    yRange: [0.32, 0.40, 0.60, 0.68],
+    yRange: [0.35, 0.40, 0.62, 0.67],
     yOutput: [40, 0, 0, -40],
   },
   {
-    opacityRange: [0.65, 0.72, 1],
+    opacityRange: [0.67, 0.72, 1],
     opacityOutput: [0, 1, 1],
-    yRange: [0.65, 0.72, 1],
+    yRange: [0.67, 0.72, 1],
     yOutput: [40, 0, 0],
   },
 ];
@@ -107,7 +109,7 @@ export const Hero: React.FC = () => {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   return (
-    <section id="hero" ref={ref} className="relative h-[300vh]">
+    <section id="hero" ref={ref} className="relative h-[500vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
