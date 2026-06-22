@@ -22,10 +22,12 @@ const chapters = [
 
 type Range = [number, number, number, number];
 
+// Ranges extendidos fuera de [0,1] para que el primer chapter ya esté
+// visible al cargar (progress=0) y el último al terminar (progress=1).
 const chapterRanges: Range[] = [
-  [0.00, 0.05, 0.28, 0.35],
+  [-0.10, 0.00, 0.28, 0.35],
   [0.32, 0.40, 0.60, 0.68],
-  [0.65, 0.72, 0.95, 1.00],
+  [0.65, 0.72, 1.00, 1.10],
 ];
 
 const Chapter: React.FC<{
@@ -56,6 +58,24 @@ const Chapter: React.FC<{
   );
 };
 
+const ChapterDot: React.FC<{
+  index: number;
+  total: number;
+  scrollYProgress: MotionValue<number>;
+}> = ({ index, total, scrollYProgress }) => {
+  const start = index / total;
+  const end = (index + 1) / total;
+  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+  return (
+    <div className="w-10 md:w-16 h-[3px] bg-white/25 rounded-full overflow-hidden">
+      <motion.div
+        style={{ scaleX, transformOrigin: 'left' }}
+        className="h-full bg-accent rounded-full"
+      />
+    </div>
+  );
+};
+
 export const Hero: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -64,7 +84,6 @@ export const Hero: React.FC = () => {
   });
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const progressScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   return (
@@ -93,18 +112,15 @@ export const Hero: React.FC = () => {
 
         <div className="absolute bottom-10 md:bottom-14 left-0 right-0 z-20 pointer-events-none">
           <div className="px-6 md:px-16 max-w-7xl mx-auto flex items-center justify-between gap-6">
-            <div className="flex items-center gap-4 w-full max-w-md">
-              <div className="flex-1 h-px bg-white/25 relative overflow-hidden rounded-full">
-                <motion.div
-                  style={{ scaleX: progressScaleX, transformOrigin: 'left' }}
-                  className="absolute inset-0 bg-accent rounded-full"
+            <div className="flex items-center gap-2">
+              {chapters.map((_, i) => (
+                <ChapterDot
+                  key={i}
+                  index={i}
+                  total={chapters.length}
+                  scrollYProgress={scrollYProgress}
                 />
-              </div>
-              <span className="text-white/70 text-xs font-medium tracking-widest uppercase whitespace-nowrap">
-                {chapters.map((_, i) => (
-                  <ChapterCounter key={i} index={i} scrollYProgress={scrollYProgress} total={chapters.length} />
-                ))}
-              </span>
+              ))}
             </div>
             <motion.span
               style={{ opacity: hintOpacity }}
@@ -116,20 +132,5 @@ export const Hero: React.FC = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const ChapterCounter: React.FC<{
-  index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}> = ({ index, total, scrollYProgress }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const opacity = useTransform(scrollYProgress, [start - 0.01, start, end, end + 0.01], [0, 1, 1, 0]);
-  return (
-    <motion.span style={{ opacity }} className="absolute">
-      {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-    </motion.span>
   );
 };
