@@ -4,12 +4,12 @@ const SPACING = 36;
 const INFLUENCE_RADIUS = 180;
 const BASE_SIZE = 1.4;
 const MAX_SIZE = 4;
-const BASE_ALPHA = 0.18;
-const MAX_ALPHA = 0.9;
-// Color primary #0033A0 → rgb(0, 51, 160)
-const COLOR_R = 0;
-const COLOR_G = 51;
-const COLOR_B = 160;
+const BASE_ALPHA = 0.20;
+const MAX_ALPHA = 0.85;
+// Slate-900 (#0f172a): casi negro con leve tinte azul
+const COLOR_R = 15;
+const COLOR_G = 23;
+const COLOR_B = 42;
 
 type Dot = { baseX: number; baseY: number };
 
