@@ -24,45 +24,62 @@ const chapters = [
 // non-decreasing. Por eso el primer chapter arranca visible (sin fade-in) y
 // el último termina visible (sin fade-out): cada uno usa su propio array de
 // keyframes.
-// Plateaus largos para dar tiempo de lectura (≈ 30/24/30% del scroll cada uno),
-// con fades cortos (≈ 5%) entre chapters. Todo dentro de [0,1] (WAAPI).
-const chapterTransforms: {
+// Plateaus generosos (≈ 28/22/26% del scroll) sobre un hero de 700vh para
+// que cada chapter se pueda leer cómodamente. Todo dentro de [0,1] (WAAPI).
+// Cada chapter puede animar x o y por separado.
+type ChapterTransform = {
   opacityRange: number[];
   opacityOutput: number[];
-  yRange: number[];
-  yOutput: number[];
-}[] = [
+  xRange?: number[];
+  xOutput?: number[];
+  yRange?: number[];
+  yOutput?: number[];
+};
+
+const chapterTransforms: ChapterTransform[] = [
+  // 01 — estático, fade out hacia arriba
   {
-    opacityRange: [0, 0.30, 0.35],
+    opacityRange: [0, 0.28, 0.34],
     opacityOutput: [1, 1, 0],
-    yRange: [0, 0.30, 0.35],
+    yRange: [0, 0.28, 0.34],
     yOutput: [0, 0, -40],
   },
+  // 02 — entra desde la derecha, sale hacia la izquierda
   {
-    opacityRange: [0.35, 0.40, 0.62, 0.67],
+    opacityRange: [0.34, 0.40, 0.62, 0.68],
     opacityOutput: [0, 1, 1, 0],
-    yRange: [0.35, 0.40, 0.62, 0.67],
-    yOutput: [40, 0, 0, -40],
+    xRange: [0.34, 0.40, 0.62, 0.68],
+    xOutput: [220, 0, 0, -180],
   },
+  // 03 — entra desde abajo
   {
-    opacityRange: [0.67, 0.72, 1],
+    opacityRange: [0.68, 0.74, 1],
     opacityOutput: [0, 1, 1],
-    yRange: [0.67, 0.72, 1],
+    yRange: [0.68, 0.74, 1],
     yOutput: [40, 0, 0],
   },
 ];
 
 const Chapter: React.FC<{
   chapter: typeof chapters[number];
-  transforms: typeof chapterTransforms[number];
+  transforms: ChapterTransform;
   scrollYProgress: MotionValue<number>;
 }> = ({ chapter, transforms, scrollYProgress }) => {
   const opacity = useTransform(scrollYProgress, transforms.opacityRange, transforms.opacityOutput);
-  const y = useTransform(scrollYProgress, transforms.yRange, transforms.yOutput);
+  const x = useTransform(
+    scrollYProgress,
+    transforms.xRange ?? [0, 1],
+    transforms.xOutput ?? [0, 0],
+  );
+  const y = useTransform(
+    scrollYProgress,
+    transforms.yRange ?? [0, 1],
+    transforms.yOutput ?? [0, 0],
+  );
 
   return (
     <motion.div
-      style={{ opacity, y }}
+      style={{ opacity, x, y }}
       className="absolute inset-0 flex flex-col justify-center"
     >
       <div className="px-6 md:px-16 max-w-7xl mx-auto w-full">
@@ -109,7 +126,7 @@ export const Hero: React.FC = () => {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   return (
-    <section id="hero" ref={ref} className="relative h-[500vh]">
+    <section id="hero" ref={ref} className="relative h-[700vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
