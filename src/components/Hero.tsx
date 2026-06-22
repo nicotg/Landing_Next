@@ -16,8 +16,6 @@ type ChapterData = {
   title: string;
   description: string;
   align: Align;
-  enterFrom: { x: number; y: number };
-  exitTo: { x: number; y: number };
 };
 
 const chapters: ChapterData[] = [
@@ -26,24 +24,18 @@ const chapters: ChapterData[] = [
     title: 'Diagnosticamos tu visión con la mejor tecnología.',
     description: 'Examen visual completo: agudeza, salud ocular y fondo de ojo en un mismo turno.',
     align: 'left',
-    enterFrom: { x: -80, y: 40 },
-    exitTo: { x: 0, y: -40 },
   },
   {
     eyebrow: '02 — Asesoramos',
     title: 'Encontramos los anteojos que reflejan quién sos.',
     description: 'Más de 30 marcas, prueba sin compromiso y asesoramiento personalizado de principio a fin.',
     align: 'right',
-    enterFrom: { x: 120, y: 40 },
-    exitTo: { x: 0, y: -40 },
   },
   {
     eyebrow: '03 — Diseñamos',
     title: 'Cristales hechos a tu medida.',
     description: 'Progresivos, polarizados y antirreflejo de las mejores marcas, calibrados a tu uso diario.',
     align: 'left',
-    enterFrom: { x: -80, y: 40 },
-    exitTo: { x: 0, y: -40 },
   },
 ];
 
@@ -65,7 +57,7 @@ export const Hero: React.FC = () => {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const chapter = chapters[activeIdx];
-  const justify = chapter.align === 'right' ? 'justify-end' : 'justify-start';
+  const blockAlign = chapter.align === 'right' ? 'ml-auto' : 'mr-auto';
   const textAlign = chapter.align === 'right' ? 'text-right' : 'text-left';
 
   return (
@@ -82,15 +74,15 @@ export const Hero: React.FC = () => {
         </motion.div>
 
         <div className="relative z-10 h-full w-full pt-20 flex items-center">
-          <div className={`w-full px-6 md:px-16 max-w-7xl mx-auto flex ${justify}`}>
+          <div className="w-full px-6 md:px-16 max-w-7xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
-                initial={{ opacity: 0, x: chapter.enterFrom.x, y: chapter.enterFrom.y }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: chapter.exitTo.x, y: chapter.exitTo.y }}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className={`max-w-3xl ${textAlign}`}
+                className={`max-w-3xl ${blockAlign} ${textAlign}`}
               >
                 <span className="block text-accent text-sm md:text-base font-semibold tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
                   {chapter.eyebrow}
