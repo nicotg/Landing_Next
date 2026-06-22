@@ -20,23 +20,43 @@ const chapters = [
   },
 ];
 
-type Range = [number, number, number, number];
-
-// Ranges extendidos fuera de [0,1] para que el primer chapter ya esté
-// visible al cargar (progress=0) y el último al terminar (progress=1).
-const chapterRanges: Range[] = [
-  [-0.10, 0.00, 0.28, 0.35],
-  [0.32, 0.40, 0.60, 0.68],
-  [0.65, 0.72, 1.00, 1.10],
+// WAAPI exige que los offsets estén dentro de [0,1] y sean monotonically
+// non-decreasing. Por eso el primer chapter arranca visible (sin fade-in) y
+// el último termina visible (sin fade-out): cada uno usa su propio array de
+// keyframes.
+const chapterTransforms: {
+  opacityRange: number[];
+  opacityOutput: number[];
+  yRange: number[];
+  yOutput: number[];
+}[] = [
+  {
+    opacityRange: [0, 0.28, 0.35],
+    opacityOutput: [1, 1, 0],
+    yRange: [0, 0.28, 0.35],
+    yOutput: [0, 0, -40],
+  },
+  {
+    opacityRange: [0.32, 0.40, 0.60, 0.68],
+    opacityOutput: [0, 1, 1, 0],
+    yRange: [0.32, 0.40, 0.60, 0.68],
+    yOutput: [40, 0, 0, -40],
+  },
+  {
+    opacityRange: [0.65, 0.72, 1],
+    opacityOutput: [0, 1, 1],
+    yRange: [0.65, 0.72, 1],
+    yOutput: [40, 0, 0],
+  },
 ];
 
 const Chapter: React.FC<{
   chapter: typeof chapters[number];
-  range: Range;
+  transforms: typeof chapterTransforms[number];
   scrollYProgress: MotionValue<number>;
-}> = ({ chapter, range, scrollYProgress }) => {
-  const opacity = useTransform(scrollYProgress, range, [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, range, [40, 0, 0, -40]);
+}> = ({ chapter, transforms, scrollYProgress }) => {
+  const opacity = useTransform(scrollYProgress, transforms.opacityRange, transforms.opacityOutput);
+  const y = useTransform(scrollYProgress, transforms.yRange, transforms.yOutput);
 
   return (
     <motion.div
@@ -104,7 +124,7 @@ export const Hero: React.FC = () => {
             <Chapter
               key={idx}
               chapter={chapter}
-              range={chapterRanges[idx]}
+              transforms={chapterTransforms[idx]}
               scrollYProgress={scrollYProgress}
             />
           ))}
