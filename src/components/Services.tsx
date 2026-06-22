@@ -78,7 +78,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicios" ref={ref} className="relative bg-dark h-[700vh]">
+    <section id="servicios" ref={ref} className="relative bg-dark h-[900vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <DottedBackground />
 
