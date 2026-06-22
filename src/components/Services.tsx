@@ -64,37 +64,25 @@ export const Services: React.FC = () => {
 
   const service = services[activeIdx];
   const Icon = service.Icon;
+  const isReversed = activeIdx % 2 === 1;
 
   return (
     <section id="servicios" ref={ref} className="relative bg-white h-[400vh]">
-      <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
 
-          {/* Texto fijo */}
-          <div>
-            <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-sm mb-5">
-              Especialidades
-            </h2>
-            <h3 className="text-5xl md:text-7xl font-bold text-dark leading-[1.05] tracking-tight">
-              ¿Qué<br />Ofrecemos?
-            </h3>
-            <p className="text-gray-500 mt-6 max-w-md font-light leading-relaxed">
-              Cuatro servicios para cuidar tu visión de principio a fin.
-            </p>
-            <div className="flex items-center gap-2 mt-10">
-              {services.map((_, i) => (
-                <ServiceDot
-                  key={i}
-                  index={i}
-                  total={services.length}
-                  scrollYProgress={scrollYProgress}
-                />
-              ))}
-            </div>
-          </div>
+        {/* Texto fijo centrado arriba */}
+        <div className="pt-24 md:pt-28 text-center px-6">
+          <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
+            Especialidades
+          </h2>
+          <h3 className="text-4xl md:text-6xl font-bold text-dark leading-[1.05] tracking-tight">
+            ¿Qué Ofrecemos?
+          </h3>
+        </div>
 
-          {/* Servicio activo */}
-          <div className="relative min-h-[440px] md:min-h-[560px] flex items-center justify-center">
+        {/* Servicio activo */}
+        <div className="flex-1 flex items-center px-6 md:px-16">
+          <div className="w-full max-w-6xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
@@ -102,26 +90,48 @@ export const Services: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center text-center"
               >
-                {/* Placeholder de silueta - reemplazar por <img src="..." /> cuando estén los PNGs */}
-                <div className="w-[200px] h-[200px] md:w-[280px] md:h-[280px] flex items-center justify-center mb-8 text-primary/85">
-                  <Icon size={280} className="w-full h-full" />
+                {/* Título del servicio (arriba) */}
+                <div className="text-center mb-8 md:mb-12">
+                  <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
+                    {service.number} / {String(services.length).padStart(2, '0')}
+                  </span>
+                  <h4 className="text-3xl md:text-5xl font-bold text-dark tracking-tight">
+                    {service.title}
+                  </h4>
                 </div>
-                <span className="text-accent text-sm font-semibold tracking-[0.3em] uppercase mb-3">
-                  {service.number} / {String(services.length).padStart(2, '0')}
-                </span>
-                <h4 className="text-3xl md:text-5xl font-bold text-dark mb-4 tracking-tight">
-                  {service.title}
-                </h4>
-                <p className="text-lg text-gray-600 font-light max-w-md leading-relaxed">
-                  {service.description}
-                </p>
+
+                {/* Silueta + descripción lado a lado (alternando L/R por servicio) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                  <div className={`flex justify-center ${isReversed ? 'md:order-2' : ''}`}>
+                    {/* Placeholder de silueta - reemplazar por <img src={service.image} /> cuando estén los PNGs */}
+                    <Icon className="w-[150px] h-[150px] md:w-[240px] md:h-[240px] text-primary/85" />
+                  </div>
+                  <div className={`flex justify-center ${isReversed ? 'md:order-1' : ''}`}>
+                    <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md text-center md:text-left">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
+
+        {/* Dots de progreso abajo */}
+        <div className="pb-10 px-6">
+          <div className="flex items-center justify-center gap-2">
+            {services.map((_, i) => (
+              <ServiceDot
+                key={i}
+                index={i}
+                total={services.length}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
