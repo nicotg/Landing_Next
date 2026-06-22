@@ -101,21 +101,23 @@ export const Services: React.FC = () => {
                 >
                   {/* Título del servicio (arriba) */}
                   <div className="mb-8 md:mb-10">
-                    <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
-                      {service.number} / {String(services.length).padStart(2, '0')}
-                    </span>
-                    <h4 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
-                      {service.title}
-                    </h4>
+                    <div className="inline-block transition-transform duration-300 ease-out hover:scale-105">
+                      <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
+                        {service.number} / {String(services.length).padStart(2, '0')}
+                      </span>
+                      <h4 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+                        {service.title}
+                      </h4>
+                    </div>
                   </div>
 
                   {/* Silueta + descripción lado a lado (silueta queda hacia el borde exterior) */}
                   <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
-                    <div className="shrink-0 text-accent/85">
+                    <div className="shrink-0 text-accent/85 transition-transform duration-300 ease-out hover:scale-110">
                       {/* Placeholder de silueta - reemplazar por <img src={service.image} /> cuando estén los PNGs */}
                       <Icon className="w-[140px] h-[140px] md:w-[200px] md:h-[200px]" />
                     </div>
-                    <p className="text-base md:text-lg text-light/70 font-light leading-relaxed max-w-md">
+                    <p className="text-base md:text-lg text-light/70 font-light leading-relaxed max-w-md transition-transform duration-300 ease-out hover:scale-105">
                       {service.description}
                     </p>
                   </div>
