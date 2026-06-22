@@ -20,7 +20,7 @@ function App() {
       <motion.footer
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ amount: 0.5 }}
         transition={{ duration: 0.6 }}
         className="bg-dark text-white py-8 text-center"
       >

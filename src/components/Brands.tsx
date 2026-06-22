@@ -90,7 +90,7 @@ export const Brands: React.FC = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ amount: 0.5 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10"
           >
@@ -100,7 +100,7 @@ export const Brands: React.FC = () => {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ amount: 0.2 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
           >
             {brands.map((brand, idx) => (
@@ -122,7 +122,7 @@ export const Brands: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12"
         >
@@ -135,7 +135,7 @@ export const Brands: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="overflow-hidden"
           onMouseEnter={() => setPaused(true)}

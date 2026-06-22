@@ -50,7 +50,7 @@ export const Services: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
@@ -62,7 +62,7 @@ export const Services: React.FC = () => {
           variants={gridVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ amount: 0.15 }}
           className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-min"
         >
           {servicesList.map((service, index) => {
