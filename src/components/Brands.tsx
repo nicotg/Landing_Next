@@ -124,13 +124,14 @@ export const Brands: React.FC = () => {
         <div className="w-full h-px bg-light/80 mb-20"></div>
 
         <motion.div
+          id="tecnologia"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-12"
+          className="text-center mb-12 scroll-mt-32"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-dark mb-4">Tecnología Óptica de Vanguardia</h3>
+          <h3 className="text-4xl md:text-6xl font-bold text-dark mb-4 tracking-tight">Tecnología Óptica de Vanguardia</h3>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
             Incorporamos los mejores tratamientos y materiales del mundo para cuidar tu visión con la máxima precisión.
           </p>

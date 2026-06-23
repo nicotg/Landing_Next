@@ -4,7 +4,7 @@ import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon, InstagramIcon } from './ic
 
 export const Contact: React.FC = () => {
   return (
-    <section className="py-24 bg-light/20 relative">
+    <section id="contacto" className="py-24 bg-light/20 relative">
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
@@ -14,7 +14,7 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-dark mb-4">Contacto</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-dark mb-4">Contacto</h2>
           <div className="w-16 h-1 bg-accent mx-auto rounded-full"></div>
         </motion.div>
 
