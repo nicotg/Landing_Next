@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
 
         <div className="flex items-center gap-5">
           <a
-            href="#"
+            href="https://www.instagram.com/nextopticas/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-accent transition-colors"

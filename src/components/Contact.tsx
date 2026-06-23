@@ -67,7 +67,7 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <a
-                  href="#"
+                  href="https://www.instagram.com/nextopticas/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-4 group"
