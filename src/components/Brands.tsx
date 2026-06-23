@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
+import marcaCustom from '../assets/technologies/Marca-Custom.png';
+import marcaPolarys from '../assets/technologies/Marca-Polarys.png';
+import marcaProlayer from '../assets/technologies/Marca-AR-Prolayer.png';
+import marcaMinux from '../assets/technologies/Marca-AR-Minux.png';
+import marcaArsion from '../assets/technologies/Marca-AR-Arsion.png';
 
 const brands = [
   "Ray-Ban",
@@ -13,31 +18,43 @@ const brands = [
   "Vogue"
 ];
 
-const technologies = [
+type Technology = {
+  name: string;
+  category: string;
+  description: string;
+  logo: string;
+};
+
+const technologies: Technology[] = [
   {
     name: "Progresivos Custom",
     category: "Progresivos",
     description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
+    logo: marcaCustom,
   },
   {
     name: "Polarys",
     category: "Polarizado",
     description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
+    logo: marcaPolarys,
   },
   {
     name: "Prolayer",
     category: "Antirreflejo",
     description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
+    logo: marcaProlayer,
   },
   {
     name: "Minux",
     category: "Antirreflejo",
     description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
+    logo: marcaMinux,
   },
   {
     name: "Arsion",
     category: "Antirreflejo",
     description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
+    logo: marcaArsion,
   },
 ];
 
@@ -155,9 +172,12 @@ export const Brands: React.FC = () => {
               {technologies.map((tech, idx) => (
                 <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
                   <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
-                    {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
-                    <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
-                      <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
+                    <div className="h-24 mb-6 flex items-center justify-center">
+                      <img
+                        src={tech.logo}
+                        alt={tech.name}
+                        className="max-h-full max-w-[180px] object-contain"
+                      />
                     </div>
                     <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
                       {tech.category}
