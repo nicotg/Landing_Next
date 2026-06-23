@@ -31,9 +31,9 @@ export const Navbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <a href="#hero" className="flex items-center" aria-label="Ir al inicio">
           <img src={logo} alt="Next Ópticas" className="h-16 md:h-20 object-contain" />
-        </div>
+        </a>
 
         {/* Links (Desktop) */}
         <div className="hidden md:flex gap-10 items-center text-white font-medium text-xl">
