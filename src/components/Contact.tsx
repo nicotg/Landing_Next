@@ -41,7 +41,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-dark text-lg">Ubicación</h4>
-                    <p className="text-gray-600">Av. Hipólito Yrigoyen 123, Nueva Córdoba, Córdoba</p>
+                    <p className="text-gray-600">Av. Rafael Núñez 4086, Córdoba</p>
                   </div>
                 </div>
 
@@ -125,15 +125,15 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10"
         >
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d108924.9602334863!2d-64.26917631379513!3d-31.399434857413645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432985f478f5b69%3A0xb0a24f9a5366b092!2zQ8OzcmRvYmE!5e0!3m2!1ses-419!2sar!4v1715535041000!5m2!1ses-419!2sar" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen={false} 
-            loading="lazy" 
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.573080071887!2d-64.23346312404938!3d-31.370758174282834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bc7ab31%3A0x3a850d59eecf9585!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODYsIFg1MDAwIEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1782184412524!5m2!1ses-419!2sar"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={false}
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Ubicación en el mapa"
+            title="Next Ópticas — Av. Rafael Núñez 4086, Córdoba"
           ></iframe>
         </motion.div>
 
