@@ -7,11 +7,11 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const techHeader = document.getElementById('tecnologia');
-      if (techHeader) {
-        // El nav se vuelve opaco cuando el header de "Tecnología de Vanguardia"
-        // está por entrar al viewport (top a 100px o menos del top).
-        const rect = techHeader.getBoundingClientRect();
+      const marcasSection = document.getElementById('marcas');
+      if (marcasSection) {
+        // El nav se vuelve opaco cuando la sección de Marcas está por entrar
+        // al viewport (top a 100px o menos del top).
+        const rect = marcasSection.getBoundingClientRect();
         setScrolled(rect.top <= 100);
       } else {
         setScrolled(window.scrollY > 50);
