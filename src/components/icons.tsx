@@ -118,3 +118,15 @@ export const InstagramIcon: React.FC<IconProps> = ({ size = 24, className }) => 
     <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
   </svg>
 );
+
+export const ChevronLeftIcon: React.FC<IconProps> = ({ size = 24, className }) => (
+  <svg width={size} height={size} className={className} {...baseProps}>
+    <path d="M14 7L9 12L14 17" />
+  </svg>
+);
+
+export const ChevronRightIcon: React.FC<IconProps> = ({ size = 24, className }) => (
+  <svg width={size} height={size} className={className} {...baseProps}>
+    <path d="M10 7L15 12L10 17" />
+  </svg>
+);

@@ -73,7 +73,7 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/85"></div>
         </motion.div>
 
-        <div className="relative z-10 h-full w-full pt-20 flex items-center">
+        <div className="relative z-10 h-full w-full pt-44 md:pt-48 flex items-center">
           <div className="w-full px-6 md:px-16 max-w-7xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div

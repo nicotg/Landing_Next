@@ -19,26 +19,26 @@ export const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 bg-dark/90 backdrop-blur-md shadow-lg' : 'py-6 bg-transparent'
+        scrolled ? 'py-6 bg-dark/90 backdrop-blur-md shadow-lg' : 'py-8 bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Next Ópticas" className="h-12 md:h-16 object-contain" />
+          <img src={logo} alt="Next Ópticas" className="h-24 md:h-32 object-contain" />
         </div>
 
         {/* Links (Desktop) */}
-        <div className="hidden md:flex gap-8 items-center text-white font-medium text-sm">
+        <div className="hidden md:flex gap-16 items-center text-white font-medium text-lg">
           <a href="#hero" className="hover:text-accent transition-colors">Inicio</a>
           <a href="#servicios" className="hover:text-accent transition-colors">Servicios</a>
           <a href="#marcas" className="hover:text-accent transition-colors">Marcas</a>
           <a href="#contacto" className="hover:text-accent transition-colors">Contacto</a>
         </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-10">
           <a
             href="#"
             target="_blank"
@@ -46,17 +46,17 @@ export const Navbar: React.FC = () => {
             className="text-white hover:text-accent transition-colors"
             aria-label="Instagram"
           >
-            <InstagramIcon size={22} />
+            <InstagramIcon size={44} />
           </a>
           <a
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-white hover:text-accent transition-colors"
+            className="flex items-center gap-4 text-white hover:text-accent transition-colors"
             aria-label="Contactar por WhatsApp"
           >
-            <WhatsAppIcon size={24} />
-            <span className="hidden md:block font-medium text-sm">Contactanos</span>
+            <WhatsAppIcon size={48} />
+            <span className="hidden md:block font-medium text-lg">Contactanos</span>
           </a>
         </div>
       </div>

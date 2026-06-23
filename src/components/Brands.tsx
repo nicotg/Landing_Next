@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
 const brands = [
   "Ray-Ban",
@@ -82,6 +83,9 @@ export const Brands: React.FC = () => {
     return () => clearInterval(t);
   }, [paused, maxIndex]);
 
+  const handlePrev = () => setCurrentIndex((i) => (i <= 0 ? maxIndex : i - 1));
+  const handleNext = () => setCurrentIndex((i) => (i >= maxIndex ? 0 : i + 1));
+
   return (
     <section id="marcas" className="py-24 bg-light/30">
       <div className="max-w-7xl mx-auto px-6">
@@ -137,33 +141,52 @@ export const Brands: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="overflow-hidden"
+          className="relative"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <motion.div
-            className="flex"
-            animate={{ x: `-${currentIndex * (100 / visibleCount)}%` }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {technologies.map((tech, idx) => (
-              <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
-                <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
-                  {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
-                  <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
-                    <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
+          <div className="overflow-hidden">
+            <motion.div
+              className="flex"
+              animate={{ x: `-${currentIndex * (100 / visibleCount)}%` }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {technologies.map((tech, idx) => (
+                <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
+                  <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
+                    {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
+                    <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
+                      <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
+                    </div>
+                    <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
+                      {tech.category}
+                    </span>
+                    <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
+                    <p className="text-gray-600 font-light leading-relaxed">
+                      {tech.description}
+                    </p>
                   </div>
-                  <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
-                    {tech.category}
-                  </span>
-                  <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
-                  <p className="text-gray-600 font-light leading-relaxed">
-                    {tech.description}
-                  </p>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Anterior"
+            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark flex items-center justify-center transition-all cursor-pointer"
+          >
+            <ChevronLeftIcon size={22} />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Siguiente"
+            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark flex items-center justify-center transition-all cursor-pointer"
+          >
+            <ChevronRightIcon size={22} />
+          </button>
         </motion.div>
 
         <div className="flex justify-center gap-2 mt-10">

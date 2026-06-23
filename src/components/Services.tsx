@@ -85,7 +85,7 @@ export const Services: React.FC = () => {
         <div className="relative z-10 h-full flex flex-col">
 
           {/* Texto fijo centrado arriba */}
-          <div className="pt-24 md:pt-28 text-center px-6 shrink-0">
+          <div className="pt-44 md:pt-52 text-center px-6 shrink-0">
             <h2 className="text-accent font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
               Especialidades
             </h2>
