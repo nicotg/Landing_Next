@@ -36,7 +36,7 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Links (Desktop) */}
-        <div className="hidden md:flex gap-8 items-center text-white font-medium text-sm">
+        <div className="hidden md:flex gap-10 items-center text-white font-medium text-xl">
           <a href="#hero" className="hover:text-accent transition-colors">Inicio</a>
           <a href="#servicios" className="hover:text-accent transition-colors">Servicios</a>
           <a href="#marcas" className="hover:text-accent transition-colors">Marcas</a>
@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => {
             aria-label="Contactar por WhatsApp"
           >
             <WhatsAppIcon size={24} />
-            <span className="hidden md:block font-medium text-sm">Contactanos</span>
+            <span className="hidden md:block font-medium text-xl">Contactanos</span>
           </a>
         </div>
       </div>
