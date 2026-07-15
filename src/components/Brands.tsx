@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 
+import logoCustom from '../assets/technologies/Marca-Custom.png';
+import logoPolarys from '../assets/technologies/Marca-Polarys.png';
+import logoProlayer from '../assets/technologies/Marca-AR-Prolayer.png';
+import logoMinux from '../assets/technologies/Marca-AR-Minux.png';
+import logoArsion from '../assets/technologies/Marca-AR-Arsion.png';
+
 const brands = [
   "Ray-Ban",
   "Oakley",
@@ -13,31 +19,83 @@ const brands = [
   "Vogue"
 ];
 
+const brandLogos: Record<string, React.ReactNode> = {
+  "Ray-Ban": (
+    <span className="text-3xl md:text-4xl italic font-serif tracking-tight font-black select-none skew-x-[-15deg] leading-none" style={{ fontFamily: "'Brush Script MT', cursive, sans-serif" }}>
+      Ray·Ban
+    </span>
+  ),
+  "Oakley": (
+    <svg viewBox="0 0 100 40" className="h-9 md:h-11 w-auto" fill="currentColor">
+      <path d="M50 8C32.3 8 18 13.4 18 20C18 26.6 32.3 32 50 32C67.7 32 82 26.6 82 20C82 13.4 67.7 8 50 8ZM50 26.4C41.2 26.4 34 23.5 34 20C34 16.5 41.2 13.6 50 13.6C58.8 13.6 66 16.5 66 20C66 23.5 58.8 26.4 50 26.4Z" />
+    </svg>
+  ),
+  "Vulk": (
+    <span className="text-3xl md:text-4xl font-extrabold tracking-[0.12em] font-sans uppercase select-none scale-y-95 font-black leading-none">
+      VULK
+    </span>
+  ),
+  "Infinit": (
+    <svg viewBox="0 0 140 40" className="h-9 md:h-11 w-auto" fill="currentColor">
+      <path d="M22 13c-4.4 0-8 3.6-8 8s3.6 8 8 8c3 0 5.6-1.7 7-4.1c1.4 2.4 4 4.1 7 4.1c4.4 0 8-3.6 8-8s-3.6-8-8-8c-3 0-5.6 1.7-7 4.1c-1.4-2.4-4-4.1-7-4.1zm0 3c2.8 0 5 2.2 5 5s-2.2 5-5 5s-5-2.2-5-5s2.2-5 5-5zm14 0c2.8 0 5 2.2 5 5s-2.2 5-5 5s-5-2.2-5-5s2.2-5 5-5z" />
+      <text x="60" y="27" fontSize="19" fontWeight="800" letterSpacing="0.25em" fontFamily="system-ui, -apple-system, sans-serif">INFINIT</text>
+    </svg>
+  ),
+  "Rusty": (
+    <span className="text-2xl md:text-3xl font-extrabold tracking-[0.2em] font-sans uppercase select-none font-black italic leading-none">
+      RUSTY
+    </span>
+  ),
+  "B+D": (
+    <div className="flex items-center gap-1 select-none leading-none">
+      <div className="w-8 h-8 rounded-full bg-current flex items-center justify-center text-white font-black text-xs md:text-sm">
+        B
+      </div>
+      <span className="text-xl md:text-2xl font-black tracking-tighter text-current">B+D</span>
+    </div>
+  ),
+  "Armani": (
+    <span className="text-2xl md:text-3xl font-light tracking-[0.3em] font-serif select-none leading-none" style={{ fontFamily: "'Didot', 'Bodoni MT', 'Cinzel', serif" }}>
+      ARMANI
+    </span>
+  ),
+  "Vogue": (
+    <span className="text-3xl md:text-4xl font-extrabold tracking-[0.18em] font-serif select-none leading-none" style={{ fontFamily: "'Didot', 'Bodoni MT', 'Cinzel', serif" }}>
+      VOGUE
+    </span>
+  )
+};
+
 const technologies = [
   {
     name: "Progresivos Custom",
     category: "Progresivos",
     description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
+    logo: logoCustom,
   },
   {
     name: "Polarys",
     category: "Polarizado",
     description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
+    logo: logoPolarys,
   },
   {
     name: "Prolayer",
     category: "Antirreflejo",
     description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
+    logo: logoProlayer,
   },
   {
     name: "Minux",
     category: "Antirreflejo",
     description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
+    logo: logoMinux,
   },
   {
     name: "Arsion",
     category: "Antirreflejo",
     description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
+    logo: logoArsion,
   },
 ];
 
@@ -105,17 +163,15 @@ export const Brands: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ amount: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {brands.map((brand, idx) => (
               <motion.div
                 key={idx}
                 variants={fadeUp}
-                className="flex items-center justify-center p-4"
+                className="flex items-center justify-center p-4 text-gray-400 hover:text-primary transition-colors duration-300 cursor-default select-none h-16"
               >
-                <span className="text-2xl md:text-3xl font-bold tracking-tighter text-dark/80 hover:text-primary transition-colors cursor-default select-none">
-                  {brand}
-                </span>
+                {brandLogos[brand] || brand}
               </motion.div>
             ))}
           </motion.div>
@@ -155,9 +211,8 @@ export const Brands: React.FC = () => {
               {technologies.map((tech, idx) => (
                 <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
                   <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
-                    {/* Placeholder de logo - reemplazar cuando el diseñador entregue los assets */}
-                    <div className="h-24 mb-6 flex items-center justify-center bg-light/40 rounded-2xl border border-dashed border-light/80">
-                      <span className="text-gray-400 text-xs font-semibold tracking-widest uppercase">Logo</span>
+                    <div className="h-24 mb-6 flex items-center justify-center bg-gray-50 rounded-2xl border border-gray-100 p-4 shrink-0">
+                      <img src={tech.logo} alt={tech.name} className="h-full object-contain" />
                     </div>
                     <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
                       {tech.category}
