@@ -112,14 +112,14 @@ const technologies = [
     category: "Antirreflejo",
     description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
     logo: logoMinux,
-    image: imgMinux,
+    image: imgArsion,
   },
   {
     name: "Arsion",
     category: "Antirreflejo",
     description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
     logo: logoArsion,
-    image: imgArsion,
+    image: imgMinux,
   },
 ];
 
@@ -249,7 +249,7 @@ export const Brands: React.FC = () => {
                     <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
                       <img src={tech.image} alt={tech.name} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-white shadow-lg border border-gray-50 flex items-center justify-center p-3.5">
+                      <div className="absolute bottom-4 right-4 w-20 h-20 rounded-full bg-white shadow-lg border border-gray-50 flex items-center justify-center p-2.5">
                         <img src={tech.logo} alt="" className="h-full w-full object-contain" />
                       </div>
                     </div>
