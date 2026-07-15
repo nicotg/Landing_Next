@@ -1,10 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
-  cubicBezier,
   motion,
   useScroll,
-  useTransform,
-  type MotionValue,
+  useMotionValueEvent,
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
 import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
@@ -64,15 +62,12 @@ export const Services: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Patrón plateau-transition: cada slide queda quieto buena parte del scroll
-  // y la transición al siguiente es corta y suave (cubic-bezier easeInOut).
-  // Da sensación de permanencia sin perder fluidez.
-  const trackY = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.28, 0.44, 0.54, 0.70, 0.80, 1],
-    ['0%', '0%', '-100%', '-100%', '-200%', '-200%', '-300%', '-300%'],
-    { ease: cubicBezier(0.65, 0, 0.35, 1) }
-  );
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const idx = Math.min(services.length - 1, Math.max(0, Math.floor(latest * services.length)));
+    setActiveIdx(idx);
+  });
 
   // Mask gradient: difumina los bordes superior e inferior del slider para
   // que el contenido se "diluya" al entrar/salir, sin tocar la opacity.
@@ -100,10 +95,11 @@ export const Services: React.FC = () => {
             </h3>
           </div>
 
-          {/* Slider vertical (scroll-driven, continuo) */}
+          {/* Slider vertical (animación de velocidad constante) */}
           <div className="flex-1 relative overflow-hidden" style={maskStyle}>
             <motion.div
-              style={{ y: trackY }}
+              animate={{ y: `-${activeIdx * 100}%` }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 flex flex-col"
             >
               {services.map((service, idx) => {
@@ -159,8 +155,7 @@ export const Services: React.FC = () => {
                 <ServiceDot
                   key={i}
                   index={i}
-                  total={services.length}
-                  scrollYProgress={scrollYProgress}
+                  isActive={i === activeIdx}
                 />
               ))}
             </div>
@@ -174,16 +169,14 @@ export const Services: React.FC = () => {
 
 const ServiceDot: React.FC<{
   index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}> = ({ index, total, scrollYProgress }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+  isActive: boolean;
+}> = ({ index, isActive }) => {
   return (
     <div className="w-10 md:w-14 h-[3px] bg-primary/15 rounded-full overflow-hidden">
       <motion.div
-        style={{ scaleX, transformOrigin: 'left' }}
+        animate={{ scaleX: isActive ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: 'left' }}
         className="h-full bg-primary rounded-full"
       />
     </div>
