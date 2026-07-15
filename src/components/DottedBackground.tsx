@@ -4,19 +4,25 @@ const SPACING = 36;
 const INFLUENCE_RADIUS = 200;
 const BASE_SIZE = 1.1;
 const MAX_SIZE = 3.5;
-const BASE_ALPHA = 0.22;
-const MAX_ALPHA = 1;
 const PULL_STRENGTH = 0.18;
 const MAX_GLOW = 14;
-// Accent #91D1F2 → rgb(145, 209, 242). Color claro para que se vea sobre fondo oscuro.
-const COLOR_R = 145;
-const COLOR_G = 209;
-const COLOR_B = 242;
 
 type Dot = { baseX: number; baseY: number };
 
-export const DottedBackground: React.FC<{ className?: string }> = ({
+export const DottedBackground: React.FC<{
+  className?: string;
+  colorR?: number;
+  colorG?: number;
+  colorB?: number;
+  baseAlpha?: number;
+  maxAlpha?: number;
+}> = ({
   className = '',
+  colorR = 145,
+  colorG = 209,
+  colorB = 242,
+  baseAlpha = 0.22,
+  maxAlpha = 1,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -69,7 +75,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
     const drawStatic = () => {
       ctx.clearRect(0, 0, width, height);
       ctx.shadowBlur = 0;
-      ctx.fillStyle = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, ${BASE_ALPHA})`;
+      ctx.fillStyle = `rgba(${colorR}, ${colorG}, ${colorB}, ${baseAlpha})`;
       for (const dot of dots) {
         ctx.beginPath();
         ctx.arc(dot.baseX, dot.baseY, BASE_SIZE, 0, Math.PI * 2);
@@ -85,7 +91,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
       current.y += (target.y - current.y) * 0.2;
 
       const r2 = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
-      ctx.shadowColor = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, 1)`;
+      ctx.shadowColor = `rgba(${colorR}, ${colorG}, ${colorB}, 1)`;
 
       for (const dot of dots) {
         const dx = current.x - dot.baseX;
@@ -93,7 +99,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
         const d2 = dx * dx + dy * dy;
 
         let size = BASE_SIZE;
-        let alpha = BASE_ALPHA;
+        let alpha = baseAlpha;
         let drawX = dot.baseX;
         let drawY = dot.baseY;
         let glow = 0;
@@ -103,7 +109,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
           const t = 1 - dist / INFLUENCE_RADIUS;
           const eased = t * t;
           size = BASE_SIZE + eased * (MAX_SIZE - BASE_SIZE);
-          alpha = BASE_ALPHA + eased * (MAX_ALPHA - BASE_ALPHA);
+          alpha = baseAlpha + eased * (maxAlpha - baseAlpha);
           drawX += dx * PULL_STRENGTH * eased;
           drawY += dy * PULL_STRENGTH * eased;
           glow = eased * MAX_GLOW;
@@ -112,7 +118,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
         ctx.shadowBlur = glow;
         ctx.beginPath();
         ctx.arc(drawX, drawY, size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${COLOR_R}, ${COLOR_G}, ${COLOR_B}, ${alpha})`;
+        ctx.fillStyle = `rgba(${colorR}, ${colorG}, ${colorB}, ${alpha})`;
         ctx.fill();
       }
 
@@ -145,7 +151,7 @@ export const DottedBackground: React.FC<{ className?: string }> = ({
       window.removeEventListener('mousemove', handleMouseMove);
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [colorR, colorG, colorB, baseAlpha, maxAlpha]);
 
   return (
     <div
