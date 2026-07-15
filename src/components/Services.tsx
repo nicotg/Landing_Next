@@ -7,7 +7,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
-import { EyeIcon, GlassesIcon, LensIcon, SunIcon } from './icons';
+import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
 import examenVisualImg from '../assets/services/examen-visual.png';
 import anteojosRecetaImg from '../assets/services/anteojos-receta.png';
 import lentesContactoImg from '../assets/services/lentes-contacto.png';
@@ -25,35 +25,35 @@ type Service = {
 const services: Service[] = [
   {
     number: '01',
-    title: 'Examen Visual',
+    title: 'Examen visual',
     description: 'Diagnóstico completo de tu salud visual con tecnología de última generación. Agudeza, fondo de ojo y presión intraocular en un mismo turno.',
     image: examenVisualImg,
-    alt: 'Lentes de prueba para examen visual',
+    alt: 'Examen visual',
     icon: <EyeIcon className="text-primary" size={26} />,
   },
   {
     number: '02',
-    title: 'Anteojos de Receta',
+    title: 'Anteojos recetados',
     description: 'Diseños exclusivos que combinan estilo y precisión óptica. Te asesoramos para que encuentres el armazón que mejor te queda.',
     image: anteojosRecetaImg,
-    alt: 'Anteojos de receta',
+    alt: 'Anteojos recetados',
     icon: <GlassesIcon className="text-primary" size={26} />,
   },
   {
     number: '03',
-    title: 'Lentes de Contacto',
-    description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
-    image: lentesContactoImg,
-    alt: 'Lente de contacto',
-    icon: <LensIcon className="text-primary" size={26} />,
+    title: 'Anteojos de sol',
+    description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
+    image: gafasSolImg,
+    alt: 'Anteojos de sol',
+    icon: <SunglassesIcon className="text-primary" size={26} />,
   },
   {
     number: '04',
-    title: 'Gafas de Sol',
-    description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
-    image: gafasSolImg,
-    alt: 'Gafas de sol',
-    icon: <SunIcon className="text-primary" size={26} />,
+    title: 'Lentes de contacto',
+    description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
+    image: lentesContactoImg,
+    alt: 'Lentes de contacto',
+    icon: <ContactLensIcon className="text-primary" size={26} />,
   },
 ];
 
@@ -115,14 +115,8 @@ export const Services: React.FC = () => {
                     <div className="w-full max-w-5xl mx-auto">
                       <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-between">
                         
-                        {/* Lado Izquierdo: Imagen */}
-                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]">
-                          <img
-                            src={service.image}
-                            alt={service.alt}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
+                        {/* Lado Izquierdo: Placeholder de Imagen (opaco) */}
+                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-300 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]" />
 
                         {/* Lado Derecho: Contenido de Texto */}
                         <div className="w-full md:w-[48%] flex flex-col items-start text-left">

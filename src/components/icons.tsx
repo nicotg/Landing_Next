@@ -132,3 +132,25 @@ export const ChevronRightIcon: React.FC<IconProps> = ({ size = 24, className }) 
     <path d="M10 7L15 12L10 17" />
   </svg>
 );
+
+export const SunglassesIcon: React.FC<IconProps> = ({ size = 24, className }) => (
+  <svg width={size} height={size} className={className} {...baseProps}>
+    <path d="M2.5 13 5 7c.6-1.3 1.5-2 3-2" />
+    <path d="M21.5 13 19 7c-.6-1.3-1.5-2-3-2" />
+    <circle cx="6" cy="15" r="4" />
+    <path d="M4.5 13.5l3 3" />
+    <path d="M3.5 15.5l2 2" />
+    <circle cx="18" cy="15" r="4" />
+    <path d="M16.5 13.5l3 3" />
+    <path d="M15.5 15.5l2 2" />
+    <path d="M10 15a2 2 0 0 1 4 0" />
+  </svg>
+);
+
+export const ContactLensIcon: React.FC<IconProps> = ({ size = 24, className }) => (
+  <svg width={size} height={size} className={className} {...baseProps}>
+    <path d="M3 13.5c1.5 4.5 11.5 4.5 13 0" />
+    <path d="M3 13.5c1.5 3 11.5 3 13 0" />
+    <path d="M19 12c0 1.38-1.12 2.5-2.5 2.5S14 13.38 14 12s2.5-4.5 2.5-4.5 2.5 3.12 2.5 4.5Z" />
+  </svg>
+);
