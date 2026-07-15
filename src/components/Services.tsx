@@ -7,6 +7,7 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
+import { EyeIcon, GlassesIcon, LensIcon, SunIcon } from './icons';
 import examenVisualImg from '../assets/services/examen-visual.png';
 import anteojosRecetaImg from '../assets/services/anteojos-receta.png';
 import lentesContactoImg from '../assets/services/lentes-contacto.png';
@@ -18,6 +19,7 @@ type Service = {
   description: string;
   image: string;
   alt: string;
+  icon: React.ReactNode;
 };
 
 const services: Service[] = [
@@ -27,6 +29,7 @@ const services: Service[] = [
     description: 'Diagnóstico completo de tu salud visual con tecnología de última generación. Agudeza, fondo de ojo y presión intraocular en un mismo turno.',
     image: examenVisualImg,
     alt: 'Lentes de prueba para examen visual',
+    icon: <EyeIcon className="text-primary" size={26} />,
   },
   {
     number: '02',
@@ -34,6 +37,7 @@ const services: Service[] = [
     description: 'Diseños exclusivos que combinan estilo y precisión óptica. Te asesoramos para que encuentres el armazón que mejor te queda.',
     image: anteojosRecetaImg,
     alt: 'Anteojos de receta',
+    icon: <GlassesIcon className="text-primary" size={26} />,
   },
   {
     number: '03',
@@ -41,6 +45,7 @@ const services: Service[] = [
     description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
     image: lentesContactoImg,
     alt: 'Lente de contacto',
+    icon: <LensIcon className="text-primary" size={26} />,
   },
   {
     number: '04',
@@ -48,6 +53,7 @@ const services: Service[] = [
     description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
     image: gafasSolImg,
     alt: 'Gafas de sol',
+    icon: <SunIcon className="text-primary" size={26} />,
   },
 ];
 
@@ -86,11 +92,11 @@ export const Services: React.FC = () => {
 
           {/* Texto fijo centrado arriba */}
           <div className="pt-32 md:pt-36 text-center px-6 shrink-0">
-            <h2 className="text-primary/70 font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
-              Especialidades
+            <h2 className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">
+              Servicios
             </h2>
-            <h3 className="text-5xl md:text-7xl font-bold text-primary leading-[1.05] tracking-tight">
-              ¿Qué Ofrecemos?
+            <h3 className="text-5xl md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
+              Soluciones para cada necesidad visual
             </h3>
           </div>
 
@@ -101,43 +107,49 @@ export const Services: React.FC = () => {
               className="absolute inset-0 flex flex-col"
             >
               {services.map((service, idx) => {
-                const isRight = idx % 2 === 1;
-                const blockAlign = isRight ? 'md:ml-auto md:mr-0' : 'md:mr-auto md:ml-0';
-                const textAlign = isRight ? 'md:text-right' : 'md:text-left';
-                const rowDirection = isRight ? 'md:flex-row-reverse' : 'md:flex-row';
-
                 return (
                   <div
                     key={idx}
                     className="shrink-0 h-full flex items-center px-6 md:px-16"
                   >
-                    <div className="w-full max-w-6xl mx-auto">
-                      <div className={`max-w-3xl mx-auto text-center ${blockAlign} ${textAlign}`}>
-                        {/* Título del servicio */}
-                        <div className="mb-8 md:mb-10">
-                          <div className="inline-block transition-transform duration-300 ease-out hover:scale-105">
-                            <span className="text-primary/70 text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
-                              {service.number} / {String(services.length).padStart(2, '0')}
-                            </span>
-                            <h4 className="text-3xl md:text-5xl font-bold text-primary tracking-tight">
-                              {service.title}
-                            </h4>
-                          </div>
+                    <div className="w-full max-w-5xl mx-auto">
+                      <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-between">
+                        
+                        {/* Lado Izquierdo: Imagen */}
+                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]">
+                          <img
+                            src={service.image}
+                            alt={service.alt}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
 
-                        {/* Silueta + descripción */}
-                        <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
-                          <div className="shrink-0 transition-transform duration-300 ease-out hover:scale-110">
-                            <img
-                              src={service.image}
-                              alt={service.alt}
-                              className="w-[160px] h-[160px] md:w-[240px] md:h-[240px] object-contain drop-shadow-[0_10px_20px_rgba(0,51,160,0.12)]"
-                            />
+                        {/* Lado Derecho: Contenido de Texto */}
+                        <div className="w-full md:w-[48%] flex flex-col items-start text-left">
+                          {/* Cabecera con Círculo + Textos */}
+                          <div className="flex items-center gap-5 mb-6">
+                            {/* Círculo Blanco con Ícono */}
+                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100/50 shrink-0 transition-transform duration-300 hover:scale-105">
+                              {service.icon}
+                            </div>
+                            
+                            {/* Número + Título */}
+                            <div className="flex flex-col">
+                              <span className="text-accent text-xs md:text-sm font-semibold tracking-[0.2em] uppercase">
+                                {service.number} / {String(services.length).padStart(2, '0')}
+                              </span>
+                              <h4 className="text-3xl md:text-5xl font-light text-primary tracking-tight mt-1">
+                                {service.title}
+                              </h4>
+                            </div>
                           </div>
-                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md transition-transform duration-300 ease-out hover:scale-105">
+
+                          {/* Descripción */}
+                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
                             {service.description}
                           </p>
                         </div>
+
                       </div>
                     </div>
                   </div>
