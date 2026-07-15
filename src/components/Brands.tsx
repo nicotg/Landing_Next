@@ -22,47 +22,60 @@ const brands = [
 const brandLogos: Record<string, React.ReactNode> = {
   "Ray-Ban": (
     <span className="text-3xl md:text-4xl italic font-serif tracking-tight font-black select-none skew-x-[-15deg] leading-none" style={{ fontFamily: "'Brush Script MT', cursive, sans-serif" }}>
-      Ray·Ban
+      Ray-Ban
     </span>
   ),
   "Oakley": (
-    <svg viewBox="0 0 100 40" className="h-9 md:h-11 w-auto" fill="currentColor">
-      <path d="M50 8C32.3 8 18 13.4 18 20C18 26.6 32.3 32 50 32C67.7 32 82 26.6 82 20C82 13.4 67.7 8 50 8ZM50 26.4C41.2 26.4 34 23.5 34 20C34 16.5 41.2 13.6 50 13.6C58.8 13.6 66 16.5 66 20C66 23.5 58.8 26.4 50 26.4Z" />
-    </svg>
+    <div className="flex flex-col items-center gap-1.5 leading-none">
+      <svg viewBox="0 0 100 24" className="h-6 md:h-7 w-auto" fill="currentColor">
+        <path d="M50 2C35.5 2 24 6.5 24 12C24 17.5 35.5 22 50 22C64.5 22 76 17.5 76 12C76 6.5 64.5 2 50 2ZM50 17C43 17 37 14.8 37 12C37 9.2 43 7 50 7C57 7 63 9.2 63 12C63 14.8 57 17 50 17Z" />
+      </svg>
+      <span className="text-[9px] font-black tracking-[0.25em] font-sans text-center translate-x-[0.125em]">OAKLEY</span>
+    </div>
   ),
   "Vulk": (
-    <span className="text-3xl md:text-4xl font-extrabold tracking-[0.12em] font-sans uppercase select-none scale-y-95 font-black leading-none">
-      VULK
-    </span>
+    <div className="flex items-center select-none leading-none">
+      <span className="text-3xl md:text-4xl font-extrabold tracking-tight font-sans lowercase font-black scale-y-90 scale-x-95">vulk</span>
+      <span className="text-[7px] font-bold align-super ml-0.5">®</span>
+    </div>
   ),
   "Infinit": (
-    <svg viewBox="0 0 140 40" className="h-9 md:h-11 w-auto" fill="currentColor">
-      <path d="M22 13c-4.4 0-8 3.6-8 8s3.6 8 8 8c3 0 5.6-1.7 7-4.1c1.4 2.4 4 4.1 7 4.1c4.4 0 8-3.6 8-8s-3.6-8-8-8c-3 0-5.6 1.7-7 4.1c-1.4-2.4-4-4.1-7-4.1zm0 3c2.8 0 5 2.2 5 5s-2.2 5-5 5s-5-2.2-5-5s2.2-5 5-5zm14 0c2.8 0 5 2.2 5 5s-2.2 5-5 5s-5-2.2-5-5s2.2-5 5-5z" />
-      <text x="60" y="27" fontSize="19" fontWeight="800" letterSpacing="0.25em" fontFamily="system-ui, -apple-system, sans-serif">INFINIT</text>
-    </svg>
+    <div className="flex flex-col items-center gap-1 leading-none select-none">
+      <span className="text-3xl md:text-4.5xl font-light text-current leading-none scale-y-95 translate-y-0.5">∞</span>
+      <span className="text-xs md:text-sm font-black tracking-[0.08em] font-sans text-current">INFINIT</span>
+    </div>
   ),
   "Rusty": (
-    <span className="text-2xl md:text-3xl font-extrabold tracking-[0.2em] font-sans uppercase select-none font-black italic leading-none">
-      RUSTY
-    </span>
+    <div className="flex flex-col items-center select-none leading-none">
+      <svg viewBox="0 0 100 24" className="h-6 md:h-7 w-auto" fill="currentColor">
+        <path d="M50 0 C47 0 44 2 43 5.5 C42 9 43.5 12.5 45.5 14.5 C47.5 16.5 51 17.5 54.7 16.5 C58.2 15.5 60.7 13 61.9 9.5 L56.3 7 C55.7 9 54.5 10.5 52.7 11 C50.9 11.5 49.2 11 48.2 10 C47.2 9 47 7.5 47.6 5.5 C48.2 3.5 49.6 2 51.4 1.5 C53.2 1 54.9 1.5 55.9 2.5 L61.5 0 C59.5 -2.5 56 -3.5 52.1 -3.5 Z" transform="translate(13, 3) scale(0.7)" />
+      </svg>
+      <span className="text-[8px] font-extrabold tracking-[0.3em] font-sans text-center translate-x-[0.15em] mt-1">RUSTY</span>
+      <span className="text-[4px] font-semibold tracking-[0.4em] font-sans text-center translate-x-[0.2em] mt-0.5 opacity-80">EYEWEAR</span>
+    </div>
   ),
   "B+D": (
-    <div className="flex items-center gap-1 select-none leading-none">
-      <div className="w-8 h-8 rounded-full bg-current flex items-center justify-center text-white font-black text-xs md:text-sm">
-        B
-      </div>
-      <span className="text-xl md:text-2xl font-black tracking-tighter text-current">B+D</span>
+    <div className="flex items-center gap-3 select-none leading-none">
+      <div className="w-5 h-5 rounded-full bg-current opacity-60 shrink-0" />
+      <span className="text-2xl md:text-3xl font-black tracking-tight text-current">B+D</span>
     </div>
   ),
   "Armani": (
-    <span className="text-2xl md:text-3xl font-light tracking-[0.3em] font-serif select-none leading-none" style={{ fontFamily: "'Didot', 'Bodoni MT', 'Cinzel', serif" }}>
-      ARMANI
-    </span>
+    <div className="flex items-center gap-1.5 select-none leading-none">
+      <span className="text-[10px] md:text-xs font-semibold tracking-[0.05em] font-serif uppercase" style={{ fontFamily: "Georgia, serif" }}>EMPORIO</span>
+      <svg viewBox="0 0 20 20" className="h-4 md:h-5 w-auto" fill="currentColor">
+        <path d="M0 4h20v2H0zm3 3h14v2H3zm-3 3h20v2H0zm5 3h10v2H5z" />
+      </svg>
+      <span className="text-[10px] md:text-xs font-semibold tracking-[0.05em] font-serif uppercase" style={{ fontFamily: "Georgia, serif" }}>ARMANI</span>
+    </div>
   ),
   "Vogue": (
-    <span className="text-3xl md:text-4xl font-extrabold tracking-[0.18em] font-serif select-none leading-none" style={{ fontFamily: "'Didot', 'Bodoni MT', 'Cinzel', serif" }}>
-      VOGUE
-    </span>
+    <div className="flex flex-col items-center select-none leading-none gap-0.5">
+      <span className="text-2xl md:text-3xl font-extrabold tracking-[0.08em] font-serif lowercase" style={{ fontFamily: "'Didot', 'Bodoni MT', 'Cinzel', serif" }}>
+        vogue
+      </span>
+      <span className="text-[7px] font-medium tracking-[0.25em] font-sans uppercase">eyewear</span>
+    </div>
   )
 };
 
