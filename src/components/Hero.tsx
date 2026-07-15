@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
   return (
     <section id="hero" ref={ref} className="relative h-[400vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Fondo con imagen y gradiente desde la izquierda */}
+        {/* Fondo con imagen y gradiente azul que llega hasta la derecha */}
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
             src={heroImg}
@@ -71,29 +71,8 @@ export const Hero: React.FC = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-primary/25 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/92 to-primary/65"></div>
         </motion.div>
-
-        {/* Líneas decorativas tecnológicas en fucsia/rosado */}
-        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
-          <div className="max-w-7xl mx-auto px-6 md:px-16 h-full relative">
-            {/* Línea vertical izquierda */}
-            <div className="absolute left-[20px] top-0 bottom-0 w-[1.5px] bg-rose-500/20">
-              {/* Brazo horizontal superior izquierdo */}
-              <div className="absolute top-[34.5%] left-[-20px] w-[50px] h-[1.5px] bg-rose-500/60" />
-              {/* Brazo horizontal inferior izquierdo */}
-              <div className="absolute bottom-[20%] left-[-20px] w-[60px] h-[1.5px] bg-rose-500/60" />
-            </div>
-            
-            {/* Línea vertical derecha */}
-            <div className="absolute right-[20px] top-0 bottom-0 w-[1.5px] bg-rose-500/20">
-              {/* Brazo horizontal intermedio derecho */}
-              <div className="absolute top-[48%] right-[-20px] w-[70px] h-[1.5px] bg-rose-500/60" />
-              {/* Brazo horizontal superior derecho */}
-              <div className="absolute top-[15%] right-[-20px] w-[40px] h-[1.5px] bg-rose-500/60" />
-            </div>
-          </div>
-        </div>
 
         <div className="relative z-20 h-full w-full pt-28 md:pt-32 flex items-center">
           <div className="w-full px-6 md:px-16 max-w-7xl mx-auto">
