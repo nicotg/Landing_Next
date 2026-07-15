@@ -53,7 +53,7 @@ export const Hero: React.FC = () => {
     setActiveIdx(idx);
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const chapter = chapters[activeIdx];
@@ -69,8 +69,8 @@ export const Hero: React.FC = () => {
             alt="Next Ópticas"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/85"></div>
+          <div className="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/90"></div>
         </motion.div>
 
         <div className="relative z-10 h-full w-full pt-28 md:pt-32 flex items-center">
