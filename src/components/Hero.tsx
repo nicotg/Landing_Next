@@ -20,19 +20,19 @@ type ChapterData = {
 
 const chapters: ChapterData[] = [
   {
-    eyebrow: '01 — Examinamos',
+    eyebrow: '01 - EXAMINAMOS',
     title: 'Diagnosticamos tu visión con la mejor tecnología.',
     description: 'Examen visual completo: agudeza, salud ocular y fondo de ojo en un mismo turno.',
     align: 'left',
   },
   {
-    eyebrow: '02 — Asesoramos',
+    eyebrow: '02 - ASESORAMOS',
     title: 'Encontramos los anteojos que reflejan quién sos.',
     description: 'Más de 30 marcas, prueba sin compromiso y asesoramiento personalizado de principio a fin.',
-    align: 'right',
+    align: 'left',
   },
   {
-    eyebrow: '03 — Diseñamos',
+    eyebrow: '03 - DISEÑAMOS',
     title: 'Cristales hechos a tu medida.',
     description: 'Progresivos, polarizados y antirreflejo de las mejores marcas, calibrados a tu uso diario.',
     align: 'left',
@@ -57,43 +57,63 @@ export const Hero: React.FC = () => {
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const chapter = chapters[activeIdx];
-  const blockAlign = chapter.align === 'right' ? 'ml-auto' : 'mr-auto';
-  const textAlign = chapter.align === 'right' ? 'text-right' : 'text-left';
+  const blockAlign = 'mr-auto';
+  const textAlign = 'text-left';
 
   return (
     <section id="hero" ref={ref} className="relative h-[400vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
+        {/* Fondo con imagen y gradiente desde la izquierda */}
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
             src={heroImg}
             alt="Next Ópticas"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/90"></div>
+          <div className="absolute inset-0 bg-primary/25 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
         </motion.div>
 
-        <div className="relative z-10 h-full w-full pt-28 md:pt-32 flex items-center">
+        {/* Líneas decorativas tecnológicas en fucsia/rosado */}
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
+          <div className="max-w-7xl mx-auto px-6 md:px-16 h-full relative">
+            {/* Línea vertical izquierda */}
+            <div className="absolute left-[20px] top-0 bottom-0 w-[1.5px] bg-rose-500/20">
+              {/* Brazo horizontal superior izquierdo */}
+              <div className="absolute top-[34.5%] left-[-20px] w-[50px] h-[1.5px] bg-rose-500/60" />
+              {/* Brazo horizontal inferior izquierdo */}
+              <div className="absolute bottom-[20%] left-[-20px] w-[60px] h-[1.5px] bg-rose-500/60" />
+            </div>
+            
+            {/* Línea vertical derecha */}
+            <div className="absolute right-[20px] top-0 bottom-0 w-[1.5px] bg-rose-500/20">
+              {/* Brazo horizontal intermedio derecho */}
+              <div className="absolute top-[48%] right-[-20px] w-[70px] h-[1.5px] bg-rose-500/60" />
+              {/* Brazo horizontal superior derecho */}
+              <div className="absolute top-[15%] right-[-20px] w-[40px] h-[1.5px] bg-rose-500/60" />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-20 h-full w-full pt-28 md:pt-32 flex items-center">
           <div className="w-full px-6 md:px-16 max-w-7xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIdx}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -40 }}
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 40 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 className={`max-w-3xl ${blockAlign} ${textAlign}`}
               >
-                <span className="block text-accent text-sm md:text-base font-semibold tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
+                <span className="block text-accent text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
                   {chapter.eyebrow}
                 </span>
-                <h2 className="text-4xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg tracking-tight leading-[1.05]">
+                <h2 className="text-4xl md:text-7xl font-light text-white mb-6 drop-shadow-lg tracking-tight leading-[1.05]">
                   {chapter.title}
                 </h2>
                 <p
-                  className={`text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed ${
-                    chapter.align === 'right' ? 'ml-auto' : ''
-                  }`}
+                  className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed"
                 >
                   {chapter.description}
                 </p>
