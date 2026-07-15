@@ -162,15 +162,26 @@ export const Brands: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-20">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.5 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-gray-400 text-sm font-semibold tracking-widest uppercase mb-10"
-          >
-            Trabajamos con las mejores marcas de armazones
-          </motion.p>
+          <div className="mb-14">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ amount: 0.5 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3"
+            >
+              Marcas
+            </motion.h2>
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ amount: 0.5 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-2xl mx-auto"
+            >
+              Armazones de las marcas más reconocidas
+            </motion.h3>
+          </div>
           <motion.div
             variants={staggerContainer}
             initial="hidden"
