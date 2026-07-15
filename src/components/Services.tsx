@@ -79,7 +79,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicios" ref={ref} className="relative bg-[#eaeaf0] h-[450vh]">
+    <section id="servicios" ref={ref} className="relative bg-[#eaeaf0] h-[280vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <DottedBackground colorR={255} colorG={255} colorB={255} baseAlpha={0.45} maxAlpha={1} />
 
@@ -99,7 +99,7 @@ export const Services: React.FC = () => {
           <div className="flex-1 relative overflow-hidden" style={maskStyle}>
             <motion.div
               animate={{ y: `-${activeIdx * 100}%` }}
-              transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 flex flex-col"
             >
               {services.map((service, idx) => {
@@ -175,7 +175,7 @@ const ServiceDot: React.FC<{
     <div className="w-10 md:w-14 h-[3px] bg-primary/15 rounded-full overflow-hidden">
       <motion.div
         animate={{ scaleX: isActive ? 1 : 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformOrigin: 'left' }}
         className="h-full bg-primary rounded-full"
       />
