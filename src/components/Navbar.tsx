@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { WhatsAppIcon } from './icons';
+import { WhatsAppIcon, InstagramIcon } from './icons';
 import logo from '../assets/Next-Logo-RGB-BlancoCompleto.png';
 
 export const Navbar: React.FC = () => {
@@ -7,45 +7,54 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      // El nav gana opacidad ni bien termina la hero section
+      setScrolled(window.scrollY > (window.innerHeight - 100));
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 bg-dark/90 backdrop-blur-md shadow-lg' : 'py-6 bg-transparent'
+        scrolled ? 'py-4 bg-primary/95 backdrop-blur-lg shadow-lg' : 'py-6 bg-primary/40 backdrop-blur-md border-b border-white/10'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center">
-          <img src={logo} alt="Next Ópticas" className="h-12 md:h-16 object-contain" />
-        </div>
+        <a href="#hero" className="flex items-center cursor-pointer">
+          <img src={logo} alt="Next Ópticas" className="h-16 md:h-20 object-contain" />
+        </a>
 
         {/* Links (Desktop) */}
-        <div className="hidden md:flex gap-8 items-center text-white font-medium text-sm">
+        <div className="hidden md:flex gap-10 items-center text-white font-medium text-xl">
           <a href="#hero" className="hover:text-accent transition-colors">Inicio</a>
           <a href="#servicios" className="hover:text-accent transition-colors">Servicios</a>
           <a href="#marcas" className="hover:text-accent transition-colors">Marcas</a>
           <a href="#contacto" className="hover:text-accent transition-colors">Contacto</a>
         </div>
 
-        {/* WhatsApp Icon */}
-        <div>
-          <a 
-            href="#" 
+        <div className="flex items-center gap-5">
+          <a
+            href="https://www.instagram.com/nextopticas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-accent transition-colors"
+            aria-label="Instagram"
+          >
+            <InstagramIcon size={22} />
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 text-white hover:text-accent transition-colors"
+            aria-label="Contactar por WhatsApp"
           >
             <WhatsAppIcon size={24} />
-            <span className="hidden md:block font-medium text-sm">Contactanos</span>
+            <span className="hidden md:block font-medium text-xl">Contactanos</span>
           </a>
         </div>
       </div>
