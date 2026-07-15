@@ -8,6 +8,12 @@ import logoProlayer from '../assets/technologies/Marca-AR-Prolayer.png';
 import logoMinux from '../assets/technologies/Marca-AR-Minux.png';
 import logoArsion from '../assets/technologies/Marca-AR-Arsion.png';
 
+import imgCustom from '../assets/technologies/custom-portrait.png';
+import imgPolarys from '../assets/technologies/polarys-portrait.png';
+import imgProlayer from '../assets/technologies/prolayer-portrait.png';
+import imgMinux from '../assets/technologies/minux-portrait.png';
+import imgArsion from '../assets/technologies/arsion-portrait.png';
+
 const brands = [
   "Ray-Ban",
   "Oakley",
@@ -85,30 +91,35 @@ const technologies = [
     category: "Progresivos",
     description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
     logo: logoCustom,
+    image: imgCustom,
   },
   {
     name: "Polarys",
     category: "Polarizado",
     description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
     logo: logoPolarys,
+    image: imgPolarys,
   },
   {
     name: "Prolayer",
     category: "Antirreflejo",
     description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
     logo: logoProlayer,
+    image: imgProlayer,
   },
   {
     name: "Minux",
     category: "Antirreflejo",
     description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
     logo: logoMinux,
+    image: imgMinux,
   },
   {
     name: "Arsion",
     category: "Antirreflejo",
     description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
     logo: logoArsion,
+    image: imgArsion,
   },
 ];
 
@@ -211,9 +222,9 @@ export const Brands: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 scroll-mt-32"
         >
-          <h3 className="text-4xl md:text-6xl font-bold text-dark mb-4 tracking-tight">Tecnología Óptica de Vanguardia</h3>
+          <h3 className="text-4xl md:text-6xl font-light text-primary mb-4 tracking-tight">Lentes que hacen la diferencia</h3>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
-            Incorporamos los mejores tratamientos y materiales del mundo para cuidar tu visión con la máxima precisión.
+            Trabajamos con tecnologías y tratamientos seleccionados para ofrecer una visión más cómoda, nítida y natural.
           </p>
         </motion.div>
 
@@ -234,17 +245,25 @@ export const Brands: React.FC = () => {
             >
               {technologies.map((tech, idx) => (
                 <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
-                  <div className="h-full bg-white p-8 rounded-3xl shadow-sm border border-light flex flex-col">
-                    <div className="h-24 mb-6 flex items-center justify-center bg-gray-50 rounded-2xl border border-gray-100 p-4 shrink-0">
-                      <img src={tech.logo} alt={tech.name} className="h-full object-contain" />
+                  <div className="h-full bg-white rounded-[32px] shadow-sm border border-light flex flex-col overflow-hidden">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
+                      <img src={tech.image} alt={tech.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 right-4 w-16 h-16 rounded-full bg-white shadow-lg border border-gray-50 flex items-center justify-center p-3.5">
+                        <img src={tech.logo} alt="" className="h-full w-full object-contain" />
+                      </div>
                     </div>
-                    <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-2">
-                      {tech.category}
-                    </span>
-                    <h4 className="text-2xl font-bold text-dark mb-3">{tech.name}</h4>
-                    <p className="text-gray-600 font-light leading-relaxed">
-                      {tech.description}
-                    </p>
+                    <div className="p-8 flex flex-col flex-1 justify-between">
+                      <div>
+                        <span className="text-xs font-semibold tracking-widest uppercase text-primary/75 mb-2 block">
+                          {tech.category}
+                        </span>
+                        <h4 className="text-2xl font-bold text-dark mb-3 tracking-tight">{tech.name}</h4>
+                        <p className="text-gray-500 font-light leading-relaxed text-sm">
+                          {tech.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
