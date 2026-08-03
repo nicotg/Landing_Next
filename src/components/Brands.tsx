@@ -8,11 +8,11 @@ import logoProlayer from '../assets/technologies/Marca-AR-Prolayer.png';
 import logoMinux from '../assets/technologies/Marca-AR-Minux.png';
 import logoArsion from '../assets/technologies/Marca-AR-Arsion.png';
 
-import imgCustom from '../assets/technologies/custom-portrait.png';
-import imgPolarys from '../assets/technologies/polarys-portrait.png';
-import imgProlayer from '../assets/technologies/prolayer-portrait.png';
-import imgMinux from '../assets/technologies/minux-portrait.png';
-import imgArsion from '../assets/technologies/arsion-portrait.png';
+import imgCustom from '../assets/technologies/custom-portrait.jpg';
+import imgPolarys from '../assets/technologies/polarys-portrait.jpg';
+import imgProlayer from '../assets/technologies/prolayer-portrait.jpg';
+import imgMinux from '../assets/technologies/minux-portrait.jpg';
+import imgArsion from '../assets/technologies/arsion-portrait.jpg';
 
 const brands = [
   "Ray-Ban",
@@ -27,9 +27,15 @@ const brands = [
 
 const brandLogos: Record<string, React.ReactNode> = {
   "Ray-Ban": (
-    <span className="text-4xl md:text-5xl italic font-serif tracking-tight font-black select-none skew-x-[-15deg] leading-none" style={{ fontFamily: "'Brush Script MT', cursive, sans-serif" }}>
-      Ray-Ban
-    </span>
+    <svg viewBox="0 0 187.09 92.49" className="h-12 md:h-14 w-auto" fill="currentColor" fillRule="evenodd">
+      <path d="M183.51,19.79c-1.99,0-3.6,1.61-3.6,3.58s1.61,3.6,3.6,3.6,3.58-1.61,3.58-3.6-1.6-3.58-3.58-3.58h0ZM183.51,26.53c-1.75,0-3.16-1.41-3.16-3.17s1.41-3.15,3.16-3.15,3.15,1.41,3.15,3.15-1.41,3.17-3.15,3.17h0Z" />
+      <path d="M185.35,22.43c0-.34-.15-.7-.45-.86-.3-.18-.64-.2-.98-.2h-1.75v4.01h.49v-1.85h.9l1.15,1.85h.58l-1.21-1.85h0c.71-.02,1.27-.31,1.27-1.1h0ZM183.41,23.14h-.75v-1.42h1.15c.5,0,1.04.08,1.04.7,0,.82-.87.72-1.44.72h0Z" />
+      <path d="M63.36,82.55l-23.38-11.42h0c-.51-.27-.78-.95-.77-1.39h0l.06-6.3h0c0-.44.1-.9.68-1.32,2.5-1.59,10.24-5.88,18.24-17.55,10.65-15.55,0-28.61-16.65-25.05-14.79,3.16-29.84,11.16-36.37,15.52C-.65,38.91.16,43.6,0,47.8c.32,1.78.97,1.62,2.42-.16,10.83-10.02,27.32-17.62,30.39-18.91,3.07-1.29,10.34-5.66,18.91-3.72,8.23,1.86,6.23,13.05,3.72,17.78-2.75,5.17-10.59,12.69-14.14,14.55-1.35.71-1.86,0-1.86-1.13h0l.57-24.33h0c0-1.62-.73-2.34-2.34-1.78h0l-2.59,1.29h0c-1.78,1.05-1.7,1.45-1.86,2.75h0l-.39,28.04h0c-.01.61-.3,1.09-.63,1.24h0l-8.44,4.75h0c-1.94.97-1.45,2.42,0,2.91h0l6.79,3.23h0c1.62.65,2.1,1.13,2.1,2.75h0l-.24,13.58h0c6.06-1.21,6.47-4.12,6.63-6.06h0v-4.12h0c.16-.97.73-1.29,1.54-1.13h0l19.72,9.54h0c1.78.81,2.75.48,4.04-1.78,1.29-2.26,1.45-3.39-.97-4.53h0Z" />
+      <path d="M97.82,48.3c-2.74,1.58-4.01,4.54-2.93,6.41,1.08,1.87,4.34,2.18,7.08.6,2.74-1.58,3.93-4.46,2.85-6.33-1.08-1.87-4.26-2.26-7-.68h0Z" />
+      <path d="M87.71,50.31c-.75.91-2.18,3.68-2.99,5.37-.81,1.7-2.51,5.54-4.2,5.54-1.79,0-2.02-4.45-2.02-6.06s-.97-1.86-1.45-1.78c-.49.08-1.86.57-2.26,2.26-.4,1.7-2.59,9.05-5.01,9.05-1.54,0-2.67-4.45-2.75-5.82-.08-1.37-.73-2.51-2.1-2.51-.97,0-2.18.48-2.67,1.05-.48.57-.57,1.45-3.15.89-2.34-.08-4.61,1.13-7.35,5.74-1.65,2.77-3,7.94-.49,10.02,2.34,1.94,6.47-1.54,7.68-2.99,1.21-1.45,2.26-2.51,2.75-3.31.48-.81.97-.73,1.21.08.24.81,1.62,3.96,3.39,3.88,1.78-.08,4.04-1.45,6.71-6.14.48-.97,1.21-.89,1.37-.08.16.81,1.21,3.48,2.99,3.48s3.59-2.7,4.53-4.28c.65-1.09,1.62-.57,1.62.49s-.49,25.86-.49,25.86c0,1.13.44,1.45,1.25,1.45h3.52c.65,0,1.21-.57,1.21-1.45h0l.73-40.21h0c0-.97-1.09-1.66-2.02-.53h0ZM60.23,66.15c-.73,1.21-2.67,4.45-4.36,3.88-.89-.49.3-3.72.89-4.85.89-1.7,3.49-4.4,4.69-3.72,1.13.65-.48,3.47-1.21,4.69h0Z" />
+      <path d="M183.37,41.36c-.32.28-.85.77-2.02.24-2.02-.81-2.18-4.61-3.23-8.08-.94-3.12-3.22-2.93-4.04-1.5h0l-2.47,3.96h0c-.44.81-1.41,2.67-2.38,2.67-1.13,0-.63-1.62-.57-3.23.04-1.09-.65-2.46-1.78-2.46-1.29,0-2.67,1.98-3.72,4.24-.73,1.58-2.63,7.64-5.01,7.64-1.54,0-1.7-4.44-1.78-5.82-.08-1.37-.57-3.07-1.94-3.07-.93,0-1.54.48-2.02,1.05-.48.57-.57,1.05-2.26.81-2.34-.08-6.22,2.1-8.97,6.71-1.65,2.77-3.64,8.59-1.13,10.67,2.34,1.94,6.55-2.59,7.76-4.04,1.21-1.45,2.26-2.51,2.75-3.31.48-.81.97-.73,1.21.08.24.81,1.62,3.96,3.39,3.88,1.78-.08,3.23-.48,5.9-5.17.49-.97,1.37-1.09,1.54-.28.16.81.32,2.95,2.02,2.95,2.91,0,6.21-7.08,7.03-8.73.73-1.45,1.9-1.05,2.3.04.58,1.56,1.09,6.59,4.24,6.59s5.29-3.35,5.94-4.4c.73-1.05.35-2.39-.77-1.41h0ZM149.11,46.21c-.73,1.21-2.34,3.88-4.04,3.31-.89-.49.22-2.83.81-3.96.89-1.7,3.49-4.44,4.69-3.76,1.13.65-.73,3.19-1.45,4.4h0Z" />
+      <path d="M133.49,41.97s-6.87-5.01-8.81-7.27c-1.3-1.52-.4-2.67.4-3.31,4.85-3.23,12.45-8.24,15.44-16,2.88-7.48-1.62-13.98-4.85-15.03-4.43-1.44-13.82,1.45-18.51,10.18-3.04,5.65-4.44,7.52-4.85,22.87-.08,2.91-.16,6.22-.16,9.86s-.4,13.5-.81,15.35c-1.54,4.36,3.07,1.78,5.17.08,2.1-1.7,1.94-4.24,1.94-5.33,0-1.37.08-25.62.81-31.03.45-3.37.97-9.62,4.53-15.03,3.56-5.41,7.19-3.23,8.16-2.34.97.89,2.34,3.15,1.62,7.76-1.13,7.15-9.37,14.95-11.48,17.38-2.1,2.42-1.62,4.53-.4,6.22.86,1.21,2.99,3.56,5.17,5.74,2.18,2.18,1.94,4.12,1.62,5.58-1.13,4.36-12.93,16.16-12.93,16.16-2.51,2.67.08,7.03.97,8.49.89,1.45,2.02.97,2.75-.24,2.91-5.41,15.44-18.51,15.44-18.51,3.64-4.61,2.1-9.05-1.21-11.56h0Z" />
+    </svg>
   ),
   "Oakley": (
     <div className="flex flex-col items-center gap-2 leading-none">
@@ -87,39 +93,39 @@ const brandLogos: Record<string, React.ReactNode> = {
 
 const technologies = [
   {
-    name: "Progresivos Custom",
-    category: "Progresivos",
-    description: "Lentes progresivos a medida: cada parámetro óptico se ajusta a tu uso diario para una adaptación inmediata y una visión natural a toda distancia.",
+    name: "Custom",
+    category: "Lentes Digitales",
+    description: "Diseñados para adaptarse a tu forma de ver. La línea de progresivos Custom combina tecnología, precisión y múltiples opciones para ofrecer una visión más natural, cómoda y personalizada.",
     logo: logoCustom,
     image: imgCustom,
   },
   {
     name: "Polarys",
-    category: "Polarizado",
-    description: "Lentes polarizados que eliminan los reflejos sobre superficies brillantes para una visión más nítida, contraste real y menos fatiga al aire libre.",
+    category: "Lentes Digitales",
+    description: "Diseñados para brindar una visión cómoda y natural en cada momento del día. Una solución confiable que combina tecnología, confort y calidad visual.",
     logo: logoPolarys,
     image: imgPolarys,
   },
   {
     name: "Prolayer",
     category: "Antirreflejo",
-    description: "Antirreflejo multicapa que reduce el deslumbramiento y mejora la nitidez frente a pantallas y luces nocturnas.",
+    description: "La máxima expresión en tratamientos antirreflejo. Prolayer combina tecnología de última generación para ofrecer una visión más nítida, mayor transparencia y un confort visual superior.",
     logo: logoProlayer,
     image: imgProlayer,
   },
   {
     name: "Minux",
     category: "Antirreflejo",
-    description: "Antirreflejo premium con repelente al agua y al polvo: tus cristales se mantienen limpios y transparentes por más tiempo.",
+    description: "El equilibrio ideal entre tecnología y confort visual. Minux reduce los reflejos y proporciona una visión más cómoda y natural para el uso diario.",
     logo: logoMinux,
-    image: imgArsion,
+    image: imgMinux,
   },
   {
     name: "Arsion",
     category: "Antirreflejo",
-    description: "Tratamiento antirreflejo de alta resistencia, con superficie endurecida para uso intensivo y mayor durabilidad.",
+    description: "Arsion ofrece un tratamiento antirreflejo confiable que combina calidad, confort visual y una excelente relación precio-calidad.",
     logo: logoArsion,
-    image: imgMinux,
+    image: imgArsion,
   },
 ];
 
@@ -249,8 +255,8 @@ export const Brands: React.FC = () => {
                     <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
                       <img src={tech.image} alt={tech.name} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-                      <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 flex items-center justify-center p-4">
-                        <img src={tech.logo} alt="" className="h-full w-full object-contain" />
+                      <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
+                        <img src={tech.logo} alt="" className="h-full w-full object-cover scale-[1.15]" />
                       </div>
                     </div>
                     <div className="p-8 flex flex-col flex-1 justify-between">
