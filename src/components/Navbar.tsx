@@ -47,7 +47,7 @@ export const Navbar: React.FC = () => {
             <InstagramIcon size={22} />
           </a>
           <a
-            href="#"
+            href="https://wa.me/5493513867839?text=%C2%A1Hola!%20Quer%C3%ADa%20hacer%20una%20consulta."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-white hover:text-accent transition-colors"
