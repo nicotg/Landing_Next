@@ -26,8 +26,11 @@ const brands = [
 ];
 
 const brandLogos: Record<string, React.ReactNode> = {
+  // Único logo sin texto: es SVG puro, así que sin <title> la marca no existe
+  // ni para los lectores de pantalla ni para los buscadores.
   "Ray-Ban": (
-    <svg viewBox="0 0 187.09 92.49" className="h-12 md:h-14 w-auto" fill="currentColor" fillRule="evenodd">
+    <svg viewBox="0 0 187.09 92.49" className="h-12 md:h-14 w-auto" fill="currentColor" fillRule="evenodd" role="img">
+      <title>Ray-Ban</title>
       <path d="M183.51,19.79c-1.99,0-3.6,1.61-3.6,3.58s1.61,3.6,3.6,3.6,3.58-1.61,3.58-3.6-1.6-3.58-3.58-3.58h0ZM183.51,26.53c-1.75,0-3.16-1.41-3.16-3.17s1.41-3.15,3.16-3.15,3.15,1.41,3.15,3.15-1.41,3.17-3.15,3.17h0Z" />
       <path d="M185.35,22.43c0-.34-.15-.7-.45-.86-.3-.18-.64-.2-.98-.2h-1.75v4.01h.49v-1.85h.9l1.15,1.85h.58l-1.21-1.85h0c.71-.02,1.27-.31,1.27-1.1h0ZM183.41,23.14h-.75v-1.42h1.15c.5,0,1.04.08,1.04.7,0,.82-.87.72-1.44.72h0Z" />
       <path d="M63.36,82.55l-23.38-11.42h0c-.51-.27-.78-.95-.77-1.39h0l.06-6.3h0c0-.44.1-.9.68-1.32,2.5-1.59,10.24-5.88,18.24-17.55,10.65-15.55,0-28.61-16.65-25.05-14.79,3.16-29.84,11.16-36.37,15.52C-.65,38.91.16,43.6,0,47.8c.32,1.78.97,1.62,2.42-.16,10.83-10.02,27.32-17.62,30.39-18.91,3.07-1.29,10.34-5.66,18.91-3.72,8.23,1.86,6.23,13.05,3.72,17.78-2.75,5.17-10.59,12.69-14.14,14.55-1.35.71-1.86,0-1.86-1.13h0l.57-24.33h0c0-1.62-.73-2.34-2.34-1.78h0l-2.59,1.29h0c-1.78,1.05-1.7,1.45-1.86,2.75h0l-.39,28.04h0c-.01.61-.3,1.09-.63,1.24h0l-8.44,4.75h0c-1.94.97-1.45,2.42,0,2.91h0l6.79,3.23h0c1.62.65,2.1,1.13,2.1,2.75h0l-.24,13.58h0c6.06-1.21,6.47-4.12,6.63-6.06h0v-4.12h0c.16-.97.73-1.29,1.54-1.13h0l19.72,9.54h0c1.78.81,2.75.48,4.04-1.78,1.29-2.26,1.45-3.39-.97-4.53h0Z" />
@@ -180,16 +183,16 @@ export const Brands: React.FC = () => {
 
         <div className="text-center mb-20">
           <div className="mb-24">
-            <motion.h2
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.5 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3"
+              className="font-display text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3"
             >
               Marcas
-            </motion.h2>
-            <motion.h3
+            </motion.p>
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.5 }}
@@ -197,7 +200,7 @@ export const Brands: React.FC = () => {
               className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-2xl mx-auto"
             >
               Armazones de las marcas más reconocidas
-            </motion.h3>
+            </motion.h2>
           </div>
           <motion.div
             variants={staggerContainer}
@@ -228,7 +231,7 @@ export const Brands: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 scroll-mt-32"
         >
-          <h3 className="text-4xl md:text-6xl font-light text-primary mb-4 tracking-tight">Lentes que hacen la diferencia</h3>
+          <h2 className="text-4xl md:text-6xl font-light text-primary mb-4 tracking-tight">Lentes que hacen la diferencia</h2>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
             Trabajamos con tecnologías y tratamientos seleccionados para ofrecer una visión más cómoda, nítida y natural.
           </p>
@@ -253,7 +256,7 @@ export const Brands: React.FC = () => {
                 <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
                   <div className="h-full bg-white rounded-[32px] shadow-sm border border-light flex flex-col overflow-hidden">
                     <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
-                      <img src={tech.image} alt={tech.name} className="w-full h-full object-cover" />
+                      <img src={tech.image} alt={`Lentes ${tech.name} — ${tech.category}`} className="w-full h-full object-cover" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
                       <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
                         <img src={tech.logo} alt="" className="h-full w-full object-cover scale-[1.15]" />
@@ -264,7 +267,7 @@ export const Brands: React.FC = () => {
                         <span className="text-xs font-semibold tracking-widest uppercase text-primary/75 mb-2 block">
                           {tech.category}
                         </span>
-                        <h4 className="text-2xl font-bold text-dark mb-3 tracking-tight">{tech.name}</h4>
+                        <h3 className="text-2xl font-bold text-dark mb-3 tracking-tight">{tech.name}</h3>
                         <p className="text-gray-500 font-light leading-relaxed text-sm">
                           {tech.description}
                         </p>

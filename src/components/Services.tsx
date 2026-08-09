@@ -6,17 +6,14 @@ import {
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
 import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
-import examenVisualImg from '../assets/services/examen-visual.png';
-import anteojosRecetaImg from '../assets/services/anteojos-receta.png';
-import lentesContactoImg from '../assets/services/lentes-contacto.png';
-import gafasSolImg from '../assets/services/gafas-sol.png';
 
+// Las fotos de cada servicio viven en ../assets/services/ pero no se importan:
+// el mosaico usa un placeholder gris. Importarlas sin renderizarlas hacía que
+// Vite las metiera en el bundle (673 kB que nadie llegaba a ver).
 type Service = {
   number: string;
   title: string;
   description: string;
-  image: string;
-  alt: string;
   icon: React.ReactNode;
 };
 
@@ -25,32 +22,24 @@ const services: Service[] = [
     number: '01',
     title: 'Examen visual',
     description: 'Diagnóstico completo de tu salud visual con tecnología de última generación. Agudeza, fondo de ojo y presión intraocular en un mismo turno.',
-    image: examenVisualImg,
-    alt: 'Examen visual',
     icon: <EyeIcon className="text-primary" size={26} />,
   },
   {
     number: '02',
     title: 'Anteojos recetados',
     description: 'Diseños exclusivos que combinan estilo y precisión óptica. Te asesoramos para que encuentres el armazón que mejor te queda.',
-    image: anteojosRecetaImg,
-    alt: 'Anteojos recetados',
     icon: <GlassesIcon className="text-primary" size={26} />,
   },
   {
     number: '03',
     title: 'Anteojos de sol',
     description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
-    image: gafasSolImg,
-    alt: 'Anteojos de sol',
     icon: <SunglassesIcon className="text-primary" size={26} />,
   },
   {
     number: '04',
     title: 'Lentes de contacto',
     description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
-    image: lentesContactoImg,
-    alt: 'Lentes de contacto',
     icon: <ContactLensIcon className="text-primary" size={26} />,
   },
 ];
@@ -87,12 +76,14 @@ export const Services: React.FC = () => {
 
           {/* Texto fijo centrado arriba */}
           <div className="pt-32 md:pt-36 text-center px-6 shrink-0">
-            <h2 className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">
+            {/* Era un h2 y ahora es un p (el título real de la sección es el h2).
+                font-display se declara a mano porque index.css solo la aplica a h1-h6. */}
+            <p className="font-display text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">
               Servicios
-            </h2>
-            <h3 className="text-5xl md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
+            </p>
+            <h2 className="text-5xl md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
               Soluciones para cada necesidad visual
-            </h3>
+            </h2>
           </div>
 
           {/* Slider vertical (animación de velocidad constante) */}
@@ -128,9 +119,9 @@ export const Services: React.FC = () => {
                               <span className="text-accent text-xs md:text-sm font-semibold tracking-[0.2em] uppercase">
                                 {service.number} / {String(services.length).padStart(2, '0')}
                               </span>
-                              <h4 className="text-3xl md:text-5xl font-light text-primary tracking-tight mt-1">
+                              <h3 className="text-3xl md:text-5xl font-light text-primary tracking-tight mt-1">
                                 {service.title}
-                              </h4>
+                              </h3>
                             </div>
                           </div>
 

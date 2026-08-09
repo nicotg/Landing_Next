@@ -3,8 +3,10 @@ import { WhatsAppIcon } from './icons';
 
 export const FloatingWhatsApp: React.FC = () => {
   return (
-    <a 
-      href="#" 
+    <a
+      href="https://wa.me/5493513867839?text=%C2%A1Hola!%20Quer%C3%ADa%20hacer%20una%20consulta."
+      target="_blank"
+      rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_25px_rgba(37,211,102,0.4)] hover:bg-[#20b858] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
       aria-label="Contactar por WhatsApp"
     >

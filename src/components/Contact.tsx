@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
+const WHATSAPP_NUMERO = '5493513867839';
+
 export const Contact: React.FC = () => {
+  const [nombre, setNombre] = useState('');
+  const [mensaje, setMensaje] = useState('');
+
+  // El form no tiene backend: arma el mensaje y abre WhatsApp con el texto listo.
+  const texto = [
+    nombre.trim() ? `¡Hola! Soy ${nombre.trim()}.` : '¡Hola!',
+    mensaje.trim() || 'Quería hacer una consulta.',
+  ].join(' ');
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
+
   return (
     <section id="contacto" className="py-24 bg-light/20 relative">
       <div className="max-w-6xl mx-auto px-6">
@@ -43,7 +55,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary text-lg">Ubicación</h4>
-                    <p className="text-gray-600">Av. Rafael Núñez 4086, Cerro de las Rosas, Córdoba</p>
+                    <p className="text-gray-600">Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba</p>
                   </div>
                 </div>
 
@@ -53,7 +65,9 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary text-lg">Teléfono / WhatsApp</h4>
-                    <p className="text-gray-600">+54 9 351 123 4567</p>
+                    <a href="tel:+5493513867839" className="text-gray-600 hover:text-primary transition-colors">
+                      +54 9 351 386 7839
+                    </a>
                   </div>
                 </div>
 
@@ -91,30 +105,38 @@ export const Contact: React.FC = () => {
               
               <form className="space-y-6">
                 <div>
-                  <label className="block text-sm font-semibold text-primary/80 mb-2">Nombre</label>
-                  <input 
-                    type="text" 
-                    placeholder="Tu nombre" 
+                  <label htmlFor="contacto-nombre" className="block text-sm font-semibold text-primary/80 mb-2">Nombre</label>
+                  <input
+                    id="contacto-nombre"
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-light focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-semibold text-primary/80 mb-2">Mensaje</label>
-                  <textarea 
+                  <label htmlFor="contacto-mensaje" className="block text-sm font-semibold text-primary/80 mb-2">Mensaje</label>
+                  <textarea
+                    id="contacto-mensaje"
                     rows={4}
-                    placeholder="¿En qué te podemos ayudar?" 
+                    placeholder="¿En qué te podemos ayudar?"
+                    value={mensaje}
+                    onChange={(e) => setMensaje(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-light focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
                   ></textarea>
                 </div>
 
-                <button 
-                  type="button"
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-4 bg-[#25D366] hover:bg-[#20b858] text-white rounded-lg font-semibold text-lg flex items-center justify-center gap-2 transition-colors shadow-md"
                 >
                   <WhatsAppIcon size={24} />
                   Enviar por WhatsApp
-                </button>
+                </a>
               </form>
             </div>
           </div>
@@ -128,14 +150,14 @@ export const Contact: React.FC = () => {
           className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10"
         >
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.5732461072434!2d-64.23346312345976!3d-31.370753594048523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bc7ab31%3A0x3a850d59eecf9585!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODYsIFg1MDAwIEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1784132110077!5m2!1ses-419!2sar" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.5733072281632!2d-64.23575201455286!3d-31.370751907972956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bdd4243%3A0x69af60a3af0cf17c!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODgsIFg0MDg4IEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1786295918807!5m2!1ses-419!2sar"
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="strict-origin-when-cross-origin"
-            title="Ubicación en el mapa"
+            title="Next Ópticas en Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba"
           ></iframe>
         </motion.div>
 
