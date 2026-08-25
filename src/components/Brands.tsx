@@ -8,11 +8,11 @@ import logoProlayer from '../assets/technologies/Marca-AR-Prolayer.png';
 import logoMinux from '../assets/technologies/Marca-AR-Minux.png';
 import logoArsion from '../assets/technologies/Marca-AR-Arsion.png';
 
-import imgCustom from '../assets/technologies/custom-portrait.jpg';
-import imgPolarys from '../assets/technologies/polarys-portrait.jpg';
-import imgProlayer from '../assets/technologies/prolayer-portrait.jpg';
-import imgMinux from '../assets/technologies/minux-portrait.jpg';
-import imgArsion from '../assets/technologies/arsion-portrait.jpg';
+import imgCustom from '../assets/technologies/custom-portrait.webp';
+import imgPolarys from '../assets/technologies/polarys-portrait.webp';
+import imgProlayer from '../assets/technologies/prolayer-portrait.webp';
+import imgMinux from '../assets/technologies/minux-portrait.webp';
+import imgArsion from '../assets/technologies/arsion-portrait.webp';
 
 const brands = [
   "Ray-Ban",
