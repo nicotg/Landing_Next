@@ -149,8 +149,8 @@ export const SunglassesIcon: React.FC<IconProps> = ({ size = 24, className }) =>
 
 export const ContactLensIcon: React.FC<IconProps> = ({ size = 24, className }) => (
   <svg width={size} height={size} className={className} {...baseProps}>
-    <path d="M3 13.5c1.5 4.5 11.5 4.5 13 0" />
-    <path d="M3 13.5c1.5 3 11.5 3 13 0" />
-    <path d="M19 12c0 1.38-1.12 2.5-2.5 2.5S14 13.38 14 12s2.5-4.5 2.5-4.5 2.5 3.12 2.5 4.5Z" />
+    {/* Lente vista en escorzo: borde elíptico + cuenco poco profundo */}
+    <ellipse cx="12" cy="10.5" rx="9" ry="3" />
+    <path d="M3 10.5c0 3.3 4 6 9 6s9-2.7 9-6" />
   </svg>
 );
