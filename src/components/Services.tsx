@@ -6,15 +6,18 @@ import {
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
 import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
+import examenVisualImg from '../assets/services/img-Destacado-ExamenVisual.jpg';
+import lentesRecetadosImg from '../assets/services/img-Destacado-LentesRecetados.jpg';
+import lentesSolImg from '../assets/services/img-Destacado-LentesSol.jpg';
+import lentesContactoImg from '../assets/services/img-Destacado-LentesContacto.jpg';
 
-// Las fotos de cada servicio viven en ../assets/services/ pero no se importan:
-// el mosaico usa un placeholder gris. Importarlas sin renderizarlas hacía que
-// Vite las metiera en el bundle (673 kB que nadie llegaba a ver).
 type Service = {
   number: string;
   title: string;
   description: string;
   icon: React.ReactNode;
+  image: string;
+  alt: string;
 };
 
 const services: Service[] = [
@@ -23,24 +26,32 @@ const services: Service[] = [
     title: 'Examen visual',
     description: 'Diagnóstico completo de tu salud visual con tecnología de última generación. Agudeza, fondo de ojo y presión intraocular en un mismo turno.',
     icon: <EyeIcon className="text-primary" size={26} />,
+    image: examenVisualImg,
+    alt: 'Examen visual con tecnología óptica',
   },
   {
     number: '02',
     title: 'Anteojos recetados',
     description: 'Diseños exclusivos que combinan estilo y precisión óptica. Te asesoramos para que encuentres el armazón que mejor te queda.',
     icon: <GlassesIcon className="text-primary" size={26} />,
+    image: lentesRecetadosImg,
+    alt: 'Persona usando anteojos recetados',
   },
   {
     number: '03',
     title: 'Anteojos de sol',
     description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
     icon: <SunglassesIcon className="text-primary" size={26} />,
+    image: lentesSolImg,
+    alt: 'Persona usando anteojos de sol',
   },
   {
     number: '04',
     title: 'Lentes de contacto',
     description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
     icon: <ContactLensIcon className="text-primary" size={26} />,
+    image: lentesContactoImg,
+    alt: 'Lentes de contacto',
   },
 ];
 
@@ -102,8 +113,15 @@ export const Services: React.FC = () => {
                     <div className="w-full max-w-5xl mx-auto">
                       <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-between">
                         
-                        {/* Lado Izquierdo: Placeholder de Imagen (opaco) */}
-                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-300 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]" />
+                        {/* Lado Izquierdo: Imagen del servicio */}
+                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-200 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]">
+                          <img
+                            src={service.image}
+                            alt={service.alt}
+                            loading={idx === 0 ? 'eager' : 'lazy'}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
 
                         {/* Lado Derecho: Contenido de Texto */}
                         <div className="w-full md:w-[48%] flex flex-col items-start text-left">

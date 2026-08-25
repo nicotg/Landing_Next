@@ -6,7 +6,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion';
-import heroImg from '../assets/foto_ejemplo_hero.jpg';
+import heroImg from '../assets/services/img-Hero.jpg';
 
 type Align = 'left' | 'right';
 
