@@ -6,10 +6,10 @@ import {
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
 import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
-import examenVisualImg from '../assets/services/img-Destacado-ExamenVisual.jpg';
-import lentesRecetadosImg from '../assets/services/img-Destacado-LentesRecetados.jpg';
-import lentesSolImg from '../assets/services/img-Destacado-LentesSol.jpg';
-import lentesContactoImg from '../assets/services/img-Destacado-LentesContacto.jpg';
+import examenVisualImg from '../assets/services/img-Destacado-ExamenVisual.webp';
+import lentesRecetadosImg from '../assets/services/img-Destacado-LentesRecetados.webp';
+import lentesSolImg from '../assets/services/img-Destacado-LentesSol.webp';
+import lentesContactoImg from '../assets/services/img-Destacado-LentesContacto.webp';
 
 type Service = {
   number: string;
