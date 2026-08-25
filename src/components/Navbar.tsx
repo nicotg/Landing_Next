@@ -7,15 +7,8 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const serviciosSection = document.getElementById('servicios');
-      if (serviciosSection) {
-        // El nav se vuelve opaco cuando Servicios (fondo claro) está por
-        // entrar al viewport. Sobre Hero (oscuro) queda transparente.
-        const rect = serviciosSection.getBoundingClientRect();
-        setScrolled(rect.top <= 100);
-      } else {
-        setScrolled(window.scrollY > 50);
-      }
+      // El nav gana opacidad ni bien termina la hero section
+      setScrolled(window.scrollY > (window.innerHeight - 100));
     };
 
     handleScroll();
@@ -26,12 +19,12 @@ export const Navbar: React.FC = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 bg-dark/60 backdrop-blur-md shadow-lg' : 'py-6 bg-transparent'
+        scrolled ? 'py-4 bg-primary/95 backdrop-blur-lg shadow-lg' : 'py-6 bg-primary/40 backdrop-blur-md border-b border-white/10'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <a href="#hero" className="flex items-center" aria-label="Ir al inicio">
+        <a href="#hero" className="flex items-center cursor-pointer">
           <img src={logo} alt="Next Ópticas" className="h-16 md:h-20 object-contain" />
         </a>
 
@@ -54,7 +47,7 @@ export const Navbar: React.FC = () => {
             <InstagramIcon size={22} />
           </a>
           <a
-            href="#"
+            href="https://wa.me/5493513867839?text=%C2%A1Hola!%20Quer%C3%ADa%20hacer%20una%20consulta."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-white hover:text-accent transition-colors"

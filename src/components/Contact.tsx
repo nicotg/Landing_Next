@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PinIcon, PhoneIcon, ClockIcon, WhatsAppIcon, InstagramIcon } from './icons';
 
+const WHATSAPP_NUMERO = '5493513867839';
+
 export const Contact: React.FC = () => {
+  const [nombre, setNombre] = useState('');
+  const [mensaje, setMensaje] = useState('');
+
+  // El form no tiene backend: arma el mensaje y abre WhatsApp con el texto listo.
+  const texto = [
+    nombre.trim() ? `¡Hola! Soy ${nombre.trim()}.` : '¡Hola!',
+    mensaje.trim() || 'Quería hacer una consulta.',
+  ].join(' ');
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
+
   return (
     <section id="contacto" className="py-24 bg-light/20 relative">
       <div className="max-w-6xl mx-auto px-6">
@@ -14,8 +26,10 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-dark mb-4">Contacto</h2>
-          <div className="w-16 h-1 bg-accent mx-auto rounded-full"></div>
+          <span className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3 block">
+            Acercate
+          </span>
+          <h2 className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight">Contacto</h2>
         </motion.div>
 
         <motion.div
@@ -29,7 +43,7 @@ export const Contact: React.FC = () => {
             
             {/* Left Side: Info */}
             <div className="p-10 md:p-14 bg-light/10">
-              <h3 className="text-2xl font-bold text-dark mb-4">Información</h3>
+              <h3 className="text-2xl md:text-3xl font-light text-primary mb-4 tracking-tight">Información</h3>
               <p className="text-gray-600 mb-10 font-light leading-relaxed">
                 Estamos acá para asesorarte. Escribinos o acercate a nuestro local para conocer más sobre nuestros productos.
               </p>
@@ -40,8 +54,8 @@ export const Contact: React.FC = () => {
                     <PinIcon size={24} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark text-lg">Ubicación</h4>
-                    <p className="text-gray-600">Av. Rafael Núñez 4086, Córdoba</p>
+                    <h4 className="font-semibold text-primary text-lg">Ubicación</h4>
+                    <p className="text-gray-600">Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba</p>
                   </div>
                 </div>
 
@@ -50,8 +64,10 @@ export const Contact: React.FC = () => {
                     <PhoneIcon size={24} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark text-lg">Teléfono / WhatsApp</h4>
-                    <p className="text-gray-600">+54 9 351 123 4567</p>
+                    <h4 className="font-semibold text-primary text-lg">Teléfono / WhatsApp</h4>
+                    <a href="tel:+5493513867839" className="text-gray-600 hover:text-primary transition-colors">
+                      +54 9 351 386 7839
+                    </a>
                   </div>
                 </div>
 
@@ -60,7 +76,7 @@ export const Contact: React.FC = () => {
                     <ClockIcon size={24} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark text-lg">Horarios</h4>
+                    <h4 className="font-semibold text-primary text-lg">Horarios</h4>
                     <p className="text-gray-600">Lun a Vie: 9:00 - 13:00 / 16:00 - 20:00</p>
                     <p className="text-gray-600">Sáb: 9:00 - 13:00</p>
                   </div>
@@ -76,7 +92,7 @@ export const Contact: React.FC = () => {
                     <InstagramIcon size={24} />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-dark text-lg group-hover:text-primary transition-colors">Instagram</h4>
+                    <h4 className="font-semibold text-primary text-lg group-hover:text-primary transition-colors">Instagram</h4>
                     <p className="text-gray-600">@nextopticas</p>
                   </div>
                 </a>
@@ -85,34 +101,42 @@ export const Contact: React.FC = () => {
 
             {/* Right Side: Form */}
             <div className="p-10 md:p-14 border-t md:border-t-0 md:border-l border-light">
-              <h3 className="text-2xl font-bold text-dark mb-8">Envianos tu consulta</h3>
+              <h3 className="text-2xl md:text-3xl font-light text-primary mb-8 tracking-tight">Envianos tu consulta</h3>
               
               <form className="space-y-6">
                 <div>
-                  <label className="block text-sm font-semibold text-dark mb-2">Nombre</label>
-                  <input 
-                    type="text" 
-                    placeholder="Tu nombre" 
+                  <label htmlFor="contacto-nombre" className="block text-sm font-semibold text-primary/80 mb-2">Nombre</label>
+                  <input
+                    id="contacto-nombre"
+                    type="text"
+                    placeholder="Tu nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-light focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-semibold text-dark mb-2">Mensaje</label>
-                  <textarea 
+                  <label htmlFor="contacto-mensaje" className="block text-sm font-semibold text-primary/80 mb-2">Mensaje</label>
+                  <textarea
+                    id="contacto-mensaje"
                     rows={4}
-                    placeholder="¿En qué te podemos ayudar?" 
+                    placeholder="¿En qué te podemos ayudar?"
+                    value={mensaje}
+                    onChange={(e) => setMensaje(e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-light focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all resize-none"
                   ></textarea>
                 </div>
 
-                <button 
-                  type="button"
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-4 bg-[#25D366] hover:bg-[#20b858] text-white rounded-lg font-semibold text-lg flex items-center justify-center gap-2 transition-colors shadow-md"
                 >
                   <WhatsAppIcon size={24} />
                   Enviar por WhatsApp
-                </button>
+                </a>
               </form>
             </div>
           </div>
@@ -125,15 +149,15 @@ export const Contact: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10"
         >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.573080071887!2d-64.23346312404938!3d-31.370758174282834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bc7ab31%3A0x3a850d59eecf9585!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODYsIFg1MDAwIEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1782184412524!5m2!1ses-419!2sar"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen={false}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Next Ópticas — Av. Rafael Núñez 4086, Córdoba"
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.5733072281632!2d-64.23575201455286!3d-31.370751907972956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bdd4243%3A0x69af60a3af0cf17c!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODgsIFg0MDg4IEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1786295918807!5m2!1ses-419!2sar"
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen={false} 
+            loading="lazy" 
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="Next Ópticas en Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba"
           ></iframe>
         </motion.div>
 

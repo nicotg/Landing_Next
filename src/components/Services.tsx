@@ -1,53 +1,46 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
-  cubicBezier,
   motion,
   useScroll,
-  useTransform,
-  type MotionValue,
+  useMotionValueEvent,
 } from 'framer-motion';
 import { DottedBackground } from './DottedBackground';
-import examenVisualImg from '../assets/services/examen-visual.png';
-import anteojosRecetaImg from '../assets/services/anteojos-receta.png';
-import lentesContactoImg from '../assets/services/lentes-contacto.png';
-import gafasSolImg from '../assets/services/gafas-sol.png';
+import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
 
+// Las fotos de cada servicio viven en ../assets/services/ pero no se importan:
+// el mosaico usa un placeholder gris. Importarlas sin renderizarlas hacía que
+// Vite las metiera en el bundle (673 kB que nadie llegaba a ver).
 type Service = {
   number: string;
   title: string;
   description: string;
-  image: string;
-  alt: string;
+  icon: React.ReactNode;
 };
 
 const services: Service[] = [
   {
     number: '01',
-    title: 'Examen Visual',
+    title: 'Examen visual',
     description: 'Diagnóstico completo de tu salud visual con tecnología de última generación. Agudeza, fondo de ojo y presión intraocular en un mismo turno.',
-    image: examenVisualImg,
-    alt: 'Lentes de prueba para examen visual',
+    icon: <EyeIcon className="text-primary" size={26} />,
   },
   {
     number: '02',
-    title: 'Anteojos de Receta',
+    title: 'Anteojos recetados',
     description: 'Diseños exclusivos que combinan estilo y precisión óptica. Te asesoramos para que encuentres el armazón que mejor te queda.',
-    image: anteojosRecetaImg,
-    alt: 'Anteojos de receta',
+    icon: <GlassesIcon className="text-primary" size={26} />,
   },
   {
     number: '03',
-    title: 'Lentes de Contacto',
-    description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
-    image: lentesContactoImg,
-    alt: 'Lente de contacto',
+    title: 'Anteojos de sol',
+    description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
+    icon: <SunglassesIcon className="text-primary" size={26} />,
   },
   {
     number: '04',
-    title: 'Gafas de Sol',
-    description: 'Protección UV total y diseño premium de las mejores marcas. Cuidá tus ojos sin renunciar al estilo.',
-    image: gafasSolImg,
-    alt: 'Gafas de sol',
+    title: 'Lentes de contacto',
+    description: 'Adaptación personalizada para una visión nítida sin armazón. Materiales premium y comodidad durante todo el día.',
+    icon: <ContactLensIcon className="text-primary" size={26} />,
   },
 ];
 
@@ -58,15 +51,12 @@ export const Services: React.FC = () => {
     offset: ['start start', 'end end'],
   });
 
-  // Patrón plateau-transition: cada slide queda quieto buena parte del scroll
-  // y la transición al siguiente es corta y suave (cubic-bezier easeInOut).
-  // Da sensación de permanencia sin perder fluidez.
-  const trackY = useTransform(
-    scrollYProgress,
-    [0, 0.18, 0.28, 0.44, 0.54, 0.70, 0.80, 1],
-    ['0%', '0%', '-100%', '-100%', '-200%', '-200%', '-300%', '-300%'],
-    { ease: cubicBezier(0.65, 0, 0.35, 1) }
-  );
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const idx = Math.min(services.length - 1, Math.max(0, Math.floor(latest * services.length)));
+    setActiveIdx(idx);
+  });
 
   // Mask gradient: difumina los bordes superior e inferior del slider para
   // que el contenido se "diluya" al entrar/salir, sin tocar la opacity.
@@ -78,66 +68,69 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicios" ref={ref} className="relative bg-light/30 h-[450vh]">
+    <section id="servicios" ref={ref} className="relative bg-[#eaeaf0] h-[280vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
-        <DottedBackground />
+        <DottedBackground colorR={255} colorG={255} colorB={255} baseAlpha={0.45} maxAlpha={1} />
 
         <div className="relative z-10 h-full flex flex-col">
 
           {/* Texto fijo centrado arriba */}
           <div className="pt-32 md:pt-36 text-center px-6 shrink-0">
-            <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
+            {/* Era un h2 y ahora es un p (el título real de la sección es el h2).
+                font-display se declara a mano porque index.css solo la aplica a h1-h6. */}
+            <p className="font-display text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">
               Servicios
-            </h2>
-            <h3 className="text-4xl md:text-6xl font-bold text-dark leading-[1.05] tracking-tight">
+            </p>
+            <h2 className="text-5xl md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
               Soluciones para cada necesidad visual
-            </h3>
+            </h2>
           </div>
 
-          {/* Slider vertical (scroll-driven, continuo) */}
+          {/* Slider vertical (animación de velocidad constante) */}
           <div className="flex-1 relative overflow-hidden" style={maskStyle}>
             <motion.div
-              style={{ y: trackY }}
+              animate={{ y: `-${activeIdx * 100}%` }}
+              transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-0 flex flex-col"
             >
               {services.map((service, idx) => {
-                const isRight = idx % 2 === 1;
-                const blockAlign = isRight ? 'md:ml-auto md:mr-0' : 'md:mr-auto md:ml-0';
-                const textAlign = isRight ? 'md:text-right' : 'md:text-left';
-                const rowDirection = isRight ? 'md:flex-row-reverse' : 'md:flex-row';
-
                 return (
                   <div
                     key={idx}
                     className="shrink-0 h-full flex items-center px-6 md:px-16"
                   >
-                    <div className="w-full max-w-6xl mx-auto">
-                      <div className={`max-w-3xl mx-auto text-center ${blockAlign} ${textAlign}`}>
-                        {/* Título del servicio */}
-                        <div className="mb-8 md:mb-10">
-                          <div className="inline-block transition-transform duration-300 ease-out hover:scale-105">
-                            <span className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
-                              {service.number} / {String(services.length).padStart(2, '0')}
-                            </span>
-                            <h4 className="text-3xl md:text-5xl font-bold text-dark tracking-tight">
-                              {service.title}
-                            </h4>
-                          </div>
-                        </div>
+                    <div className="w-full max-w-5xl mx-auto">
+                      <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-between">
+                        
+                        {/* Lado Izquierdo: Placeholder de Imagen (opaco) */}
+                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-300 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]" />
 
-                        {/* Silueta + descripción */}
-                        <div className={`flex flex-col ${rowDirection} gap-6 md:gap-10 items-center`}>
-                          <div className="shrink-0 transition-transform duration-300 ease-out hover:scale-110">
-                            <img
-                              src={service.image}
-                              alt={service.alt}
-                              className="w-[160px] h-[160px] md:w-[240px] md:h-[240px] object-contain drop-shadow-[0_10px_25px_rgba(0,51,160,0.18)]"
-                            />
+                        {/* Lado Derecho: Contenido de Texto */}
+                        <div className="w-full md:w-[48%] flex flex-col items-start text-left">
+                          {/* Cabecera con Círculo + Textos */}
+                          <div className="flex items-center gap-5 mb-6">
+                            {/* Círculo Blanco con Ícono */}
+                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100/50 shrink-0 transition-transform duration-300 hover:scale-105">
+                              {service.icon}
+                            </div>
+                            
+                            {/* Número + Título */}
+                            <div className="flex flex-col">
+                              <span className="text-accent text-xs md:text-sm font-semibold tracking-[0.2em] uppercase">
+                                {service.number} / {String(services.length).padStart(2, '0')}
+                              </span>
+                              <h3 className="text-3xl md:text-5xl font-light text-primary tracking-tight mt-1">
+                                {service.title}
+                              </h3>
+                            </div>
                           </div>
-                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md transition-transform duration-300 ease-out hover:scale-105">
+
+                          {/* Descripción */}
+                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
                             {service.description}
                           </p>
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -153,8 +146,7 @@ export const Services: React.FC = () => {
                 <ServiceDot
                   key={i}
                   index={i}
-                  total={services.length}
-                  scrollYProgress={scrollYProgress}
+                  isActive={i === activeIdx}
                 />
               ))}
             </div>
@@ -168,16 +160,14 @@ export const Services: React.FC = () => {
 
 const ServiceDot: React.FC<{
   index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}> = ({ index, total, scrollYProgress }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+  isActive: boolean;
+}> = ({ index, isActive }) => {
   return (
-    <div className="w-10 md:w-14 h-[3px] bg-light rounded-full overflow-hidden">
+    <div className="w-10 md:w-14 h-[3px] bg-primary/15 rounded-full overflow-hidden">
       <motion.div
-        style={{ scaleX, transformOrigin: 'left' }}
+        animate={{ scaleX: isActive ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: 'left' }}
         className="h-full bg-primary rounded-full"
       />
     </div>
