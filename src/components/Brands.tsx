@@ -197,7 +197,7 @@ export const Brands: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.5 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-2xl mx-auto"
+              className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-4xl mx-auto"
             >
               Armazones de las marcas más reconocidas
             </motion.h2>
