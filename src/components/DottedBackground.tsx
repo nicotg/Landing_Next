@@ -4,14 +4,14 @@ const SPACING = 36;
 const INFLUENCE_RADIUS = 200;
 const BASE_SIZE = 1.1;
 const MAX_SIZE = 3.5;
-const BASE_ALPHA = 0.22;
-const MAX_ALPHA = 1;
+const BASE_ALPHA = 0.14;
+const MAX_ALPHA = 0.75;
 const PULL_STRENGTH = 0.18;
-const MAX_GLOW = 14;
-// Accent #91D1F2 → rgb(145, 209, 242). Color claro para que se vea sobre fondo oscuro.
-const COLOR_R = 145;
-const COLOR_G = 209;
-const COLOR_B = 242;
+const MAX_GLOW = 8;
+// Primary #0033A0 → rgb(0, 51, 160). Color oscuro para que se vea sobre fondo claro.
+const COLOR_R = 0;
+const COLOR_G = 51;
+const COLOR_B = 160;
 
 type Dot = { baseX: number; baseY: number };
 

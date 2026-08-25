@@ -7,11 +7,11 @@ export const Navbar: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const marcasSection = document.getElementById('marcas');
-      if (marcasSection) {
-        // El nav se vuelve opaco cuando la sección de Marcas está por entrar
-        // al viewport (top a 100px o menos del top).
-        const rect = marcasSection.getBoundingClientRect();
+      const serviciosSection = document.getElementById('servicios');
+      if (serviciosSection) {
+        // El nav se vuelve opaco cuando Servicios (fondo claro) está por
+        // entrar al viewport. Sobre Hero (oscuro) queda transparente.
+        const rect = serviciosSection.getBoundingClientRect();
         setScrolled(rect.top <= 100);
       } else {
         setScrolled(window.scrollY > 50);

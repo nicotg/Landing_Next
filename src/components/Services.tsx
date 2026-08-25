@@ -78,7 +78,7 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicios" ref={ref} className="relative bg-dark h-[450vh]">
+    <section id="servicios" ref={ref} className="relative bg-light/30 h-[450vh]">
       <div className="sticky top-0 h-screen overflow-hidden">
         <DottedBackground />
 
@@ -86,11 +86,11 @@ export const Services: React.FC = () => {
 
           {/* Texto fijo centrado arriba */}
           <div className="pt-32 md:pt-36 text-center px-6 shrink-0">
-            <h2 className="text-accent font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
+            <h2 className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm mb-3">
               Servicios
             </h2>
-            <h3 className="text-5xl md:text-7xl font-bold text-white leading-[1.05] tracking-tight">
-              ¿Qué Ofrecemos?
+            <h3 className="text-4xl md:text-6xl font-bold text-dark leading-[1.05] tracking-tight">
+              Soluciones para cada necesidad visual
             </h3>
           </div>
 
@@ -116,10 +116,10 @@ export const Services: React.FC = () => {
                         {/* Título del servicio */}
                         <div className="mb-8 md:mb-10">
                           <div className="inline-block transition-transform duration-300 ease-out hover:scale-105">
-                            <span className="text-accent text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
+                            <span className="text-primary text-xs font-semibold tracking-[0.3em] uppercase mb-3 block">
                               {service.number} / {String(services.length).padStart(2, '0')}
                             </span>
-                            <h4 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+                            <h4 className="text-3xl md:text-5xl font-bold text-dark tracking-tight">
                               {service.title}
                             </h4>
                           </div>
@@ -131,10 +131,10 @@ export const Services: React.FC = () => {
                             <img
                               src={service.image}
                               alt={service.alt}
-                              className="w-[160px] h-[160px] md:w-[240px] md:h-[240px] object-contain drop-shadow-[0_0_30px_rgba(145,209,242,0.35)]"
+                              className="w-[160px] h-[160px] md:w-[240px] md:h-[240px] object-contain drop-shadow-[0_10px_25px_rgba(0,51,160,0.18)]"
                             />
                           </div>
-                          <p className="text-base md:text-lg text-light/70 font-light leading-relaxed max-w-md transition-transform duration-300 ease-out hover:scale-105">
+                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md transition-transform duration-300 ease-out hover:scale-105">
                             {service.description}
                           </p>
                         </div>
@@ -175,10 +175,10 @@ const ServiceDot: React.FC<{
   const end = (index + 1) / total;
   const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
   return (
-    <div className="w-10 md:w-14 h-[3px] bg-white/15 rounded-full overflow-hidden">
+    <div className="w-10 md:w-14 h-[3px] bg-light rounded-full overflow-hidden">
       <motion.div
         style={{ scaleX, transformOrigin: 'left' }}
-        className="h-full bg-accent rounded-full"
+        className="h-full bg-primary rounded-full"
       />
     </div>
   );

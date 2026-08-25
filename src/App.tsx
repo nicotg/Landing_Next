@@ -22,9 +22,9 @@ function App() {
         whileInView={{ opacity: 1 }}
         viewport={{ amount: 0.5 }}
         transition={{ duration: 0.6 }}
-        className="bg-dark text-white py-8 text-center"
+        className="bg-primary text-white py-8 text-center"
       >
-        <p className="text-light/60 font-light">
+        <p className="text-white/70 font-light">
           © {new Date().getFullYear()} Next Ópticas. Todos los derechos reservados.
         </p>
       </motion.footer>
