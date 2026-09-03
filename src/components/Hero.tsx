@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
       {/* El diseño del hero no tiene lugar para un titular fijo, pero la página
           necesita un H1 único con la propuesta de valor y la ubicación. */}
       <h1 className="sr-only">
-        Next Ópticas — Óptica en Cerro de las Rosas, Córdoba: examen visual,
+        Next Ópticas — Óptica en Córdoba, Cerro de las Rosas: examen visual,
         anteojos recetados y de sol, y lentes de contacto
       </h1>
 

@@ -42,7 +42,8 @@ const brandLogos: Record<string, React.ReactNode> = {
   ),
   "Oakley": (
     <div className="flex flex-col items-center gap-2 leading-none">
-      <svg viewBox="0 0 100 24" className="h-8 md:h-10 w-auto" fill="currentColor">
+      <svg viewBox="0 0 100 24" className="h-8 md:h-10 w-auto" fill="currentColor" role="img">
+        <title>Oakley</title>
         <path d="M50 2C35.5 2 24 6.5 24 12C24 17.5 35.5 22 50 22C64.5 22 76 17.5 76 12C76 6.5 64.5 2 50 2ZM50 17C43 17 37 14.8 37 12C37 9.2 43 7 50 7C57 7 63 9.2 63 12C63 14.8 57 17 50 17Z" />
       </svg>
       <span className="text-[11px] font-black tracking-[0.25em] font-sans text-center translate-x-[0.125em]">OAKLEY</span>
@@ -62,7 +63,8 @@ const brandLogos: Record<string, React.ReactNode> = {
   ),
   "Rusty": (
     <div className="flex flex-col items-center select-none leading-none">
-      <svg viewBox="0 0 100 24" className="h-8 md:h-10 w-auto" fill="currentColor">
+      <svg viewBox="0 0 100 24" className="h-8 md:h-10 w-auto" fill="currentColor" role="img">
+        <title>Rusty</title>
         <path d="M50 0 C47 0 44 2 43 5.5 C42 9 43.5 12.5 45.5 14.5 C47.5 16.5 51 17.5 54.7 16.5 C58.2 15.5 60.7 13 61.9 9.5 L56.3 7 C55.7 9 54.5 10.5 52.7 11 C50.9 11.5 49.2 11 48.2 10 C47.2 9 47 7.5 47.6 5.5 C48.2 3.5 49.6 2 51.4 1.5 C53.2 1 54.9 1.5 55.9 2.5 L61.5 0 C59.5 -2.5 56 -3.5 52.1 -3.5 Z" transform="translate(13, 3) scale(0.7)" />
       </svg>
       <span className="text-[10px] font-extrabold tracking-[0.3em] font-sans text-center translate-x-[0.15em] mt-1">RUSTY</span>
@@ -78,7 +80,8 @@ const brandLogos: Record<string, React.ReactNode> = {
   "Armani": (
     <div className="flex items-center gap-2 select-none leading-none">
       <span className="text-xs md:text-sm font-semibold tracking-[0.05em] font-serif uppercase" style={{ fontFamily: "Georgia, serif" }}>EMPORIO</span>
-      <svg viewBox="0 0 20 20" className="h-5 md:h-6 w-auto" fill="currentColor">
+      <svg viewBox="0 0 20 20" className="h-5 md:h-6 w-auto" fill="currentColor" role="img">
+        <title>Emporio Armani</title>
         <path d="M0 4h20v2H0zm3 3h14v2H3zm-3 3h20v2H0zm5 3h10v2H5z" />
       </svg>
       <span className="text-xs md:text-sm font-semibold tracking-[0.05em] font-serif uppercase" style={{ fontFamily: "Georgia, serif" }}>ARMANI</span>
@@ -259,7 +262,7 @@ export const Brands: React.FC = () => {
                       <img src={tech.image} alt={`Lentes ${tech.name} — ${tech.category}`} className="w-full h-full object-cover" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
                       <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
-                        <img src={tech.logo} alt="" className="h-full w-full object-cover scale-[1.15]" />
+                        <img src={tech.logo} alt={`Logo ${tech.name}`} className="h-full w-full object-cover scale-[1.15]" />
                       </div>
                     </div>
                     <div className="p-8 flex flex-col flex-1 justify-between">
