@@ -188,7 +188,7 @@ export const Brands: React.FC = () => {
                       <img src={tech.image} alt={`Lentes ${tech.name} — ${tech.category}`} className="w-full h-full object-cover" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
                       <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
-                        <img src={tech.logo} alt="" className="h-full w-full object-cover scale-[1.15]" />
+                        <img src={tech.logo} alt={`Logo ${tech.name}`} className="h-full w-full object-cover scale-[1.15]" />
                       </div>
                     </div>
                     <div className="p-8 flex flex-col flex-1 justify-between">

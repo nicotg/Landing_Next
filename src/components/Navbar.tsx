@@ -18,6 +18,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav
+      aria-label="Navegación principal"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled ? 'py-4 bg-primary/95 backdrop-blur-lg shadow-lg' : 'py-6 bg-primary/40 backdrop-blur-md border-b border-white/10'
       }`}
