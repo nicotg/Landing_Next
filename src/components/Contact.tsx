@@ -55,7 +55,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary text-lg">Ubicación</h4>
-                    <p className="text-gray-600">Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba</p>
+                    <p className="text-gray-600">Av. Rafael Núñez 4086, Cerro de las Rosas, Córdoba</p>
                   </div>
                 </div>
 
@@ -151,14 +151,14 @@ export const Contact: React.FC = () => {
           className="w-full h-96 rounded-3xl overflow-hidden shadow-lg border border-light relative z-10"
         >
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.5733072281632!2d-64.23575201455286!3d-31.370751907972956!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bdd4243%3A0x69af60a3af0cf17c!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODgsIFg0MDg4IEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1786295918807!5m2!1ses-419!2sar"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3406.5732461072434!2d-64.23346312345976!3d-31.370753594048523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432992f8bc7ab31%3A0x3a850d59eecf9585!2zQXYuIFJhZmFlbCBOw7rDsWV6IDQwODYsIFg1MDAwIEPDs3Jkb2Jh!5e0!3m2!1ses-419!2sar!4v1788351434549!5m2!1ses-419!2sar"
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
             allowFullScreen={false} 
             loading="lazy" 
             referrerPolicy="strict-origin-when-cross-origin"
-            title="Next Ópticas en Av. Rafael Núñez 4088, Cerro de las Rosas, Córdoba"
+            title="Next Ópticas en Av. Rafael Núñez 4086, Cerro de las Rosas, Córdoba"
           ></iframe>
         </motion.div>
 

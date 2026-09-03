@@ -52,7 +52,7 @@ export const Hero: React.FC = () => {
     setActiveIdx(idx);
   });
 
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   const blockAlign = 'mr-auto';
