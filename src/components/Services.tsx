@@ -69,7 +69,7 @@ export const Services: React.FC = () => {
     setActiveIdx(Math.round(latest * (services.length - 1)));
   });
 
-  useChapterScroll(ref, services.length);
+  useChapterScroll(ref, services.length, { snapEnd: true });
 
   // Mask gradient: difumina los bordes superior e inferior del slider para
   // que el contenido se "diluya" al entrar/salir, sin tocar la opacity.
@@ -83,19 +83,19 @@ export const Services: React.FC = () => {
   return (
     <section id="servicios" ref={ref} className="relative bg-[#eaeaf0]"
       style={{ height: `${services.length * 100}vh` }}>
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-svh md:h-screen overflow-hidden">
         <DottedBackground colorR={255} colorG={255} colorB={255} baseAlpha={0.45} maxAlpha={1} />
 
         <div className="relative z-10 h-full flex flex-col">
 
           {/* Texto fijo centrado arriba */}
-          <div className="pt-32 md:pt-36 text-center px-6 shrink-0">
+          <div className="pt-20 md:pt-36 text-center px-6 shrink-0">
             {/* Era un h2 y ahora es un p (el título real de la sección es el h2).
                 font-display se declara a mano porque index.css solo la aplica a h1-h6. */}
-            <p className="font-display text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3">
+            <p className="font-display text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-2 md:mb-3">
               Servicios
             </p>
-            <h2 className="text-5xl md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
+            <h2 className="text-[length:clamp(1.5rem,7vw,2.25rem)] md:text-7xl font-light text-primary leading-[1.05] tracking-tight">
               Soluciones para cada necesidad visual
             </h2>
           </div>
@@ -114,10 +114,10 @@ export const Services: React.FC = () => {
                     className="shrink-0 h-full flex items-center px-6 md:px-16"
                   >
                     <div className="w-full max-w-5xl mx-auto">
-                      <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center justify-between">
+                      <div className="flex flex-col md:flex-row gap-5 md:gap-16 items-center justify-between">
                         
                         {/* Lado Izquierdo: Imagen del servicio */}
-                        <div className="w-full md:w-[48%] aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-200 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]">
+                        <div className="w-full md:w-[48%] h-[24svh] md:h-auto md:aspect-[4/3] rounded-[24px] md:rounded-[32px] overflow-hidden bg-zinc-200 shadow-lg border border-white/50 shrink-0 transition-transform duration-300 ease-out hover:scale-[1.02]">
                           <img
                             src={service.image}
                             alt={service.alt}
@@ -129,9 +129,9 @@ export const Services: React.FC = () => {
                         {/* Lado Derecho: Contenido de Texto */}
                         <div className="w-full md:w-[48%] flex flex-col items-start text-left">
                           {/* Cabecera con Círculo + Textos */}
-                          <div className="flex items-center gap-5 mb-6">
+                          <div className="flex items-center gap-4 md:gap-5 mb-3 md:mb-6">
                             {/* Círculo Blanco con Ícono */}
-                            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100/50 shrink-0 transition-transform duration-300 hover:scale-105">
+                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100/50 shrink-0 transition-transform duration-300 hover:scale-105">
                               {service.icon}
                             </div>
                             
@@ -140,14 +140,14 @@ export const Services: React.FC = () => {
                               <span className="text-accent text-xs md:text-sm font-semibold tracking-[0.2em] uppercase">
                                 {service.number} / {String(services.length).padStart(2, '0')}
                               </span>
-                              <h3 className="text-3xl md:text-5xl font-light text-primary tracking-tight mt-1">
+                              <h3 className="text-[length:clamp(1.25rem,6vw,1.75rem)] md:text-5xl font-light text-primary tracking-tight mt-1">
                                 {service.title}
                               </h3>
                             </div>
                           </div>
 
                           {/* Descripción */}
-                          <p className="text-base md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
+                          <p className="text-sm md:text-lg text-gray-600 font-light leading-relaxed max-w-md">
                             {service.description}
                           </p>
                         </div>
@@ -161,7 +161,7 @@ export const Services: React.FC = () => {
           </div>
 
           {/* Dots de progreso abajo (fijos) */}
-          <div className="pb-10 px-6 shrink-0">
+          <div className="pb-6 md:pb-10 px-6 shrink-0">
             <div className="flex items-center justify-center gap-2">
               {services.map((_, i) => (
                 <ServiceDot
