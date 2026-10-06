@@ -29,7 +29,7 @@ export const Contact: React.FC = () => {
           <span className="text-accent font-semibold tracking-[0.2em] uppercase text-xs md:text-sm mb-3 block">
             Acercate
           </span>
-          <h2 className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight">Contacto</h2>
+          <h2 className="text-[length:clamp(1.75rem,8vw,2.5rem)] md:text-6xl font-light text-primary leading-[1.1] tracking-tight">Contacto</h2>
         </motion.div>
 
         <motion.div

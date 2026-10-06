@@ -22,7 +22,7 @@ function App() {
         whileInView={{ opacity: 1 }}
         viewport={{ amount: 0.5 }}
         transition={{ duration: 0.6 }}
-        className="bg-primary text-white py-12"
+        className="bg-primary text-white pt-12 pb-28 md:py-12"
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-8 mb-8">

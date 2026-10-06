@@ -20,13 +20,13 @@ export const Navbar: React.FC = () => {
     <nav
       aria-label="Navegación principal"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'py-4 bg-primary/95 backdrop-blur-lg shadow-lg' : 'py-6 bg-primary/40 backdrop-blur-md border-b border-white/10'
+        scrolled ? 'py-2 md:py-4 bg-primary/95 backdrop-blur-lg shadow-lg' : 'py-3 md:py-6 bg-primary/40 backdrop-blur-md border-b border-white/10'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <a href="#hero" className="flex items-center cursor-pointer">
-          <img src={logo} alt="Next Ópticas" className="h-16 md:h-20 object-contain" />
+          <img src={logo} alt="Next Ópticas" className="h-11 md:h-20 object-contain" />
         </a>
 
         {/* Links (Desktop) */}

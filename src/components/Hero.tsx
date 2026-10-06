@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
         anteojos recetados y de sol, y lentes de contacto
       </h1>
 
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-svh md:h-screen overflow-hidden">
         {/* Fondo con imagen y gradiente azul que llega hasta la derecha */}
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
@@ -81,7 +81,7 @@ export const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/92 to-primary/65"></div>
         </motion.div>
 
-        <div className="relative z-20 h-full w-full pt-28 md:pt-32 flex items-center">
+        <div className="relative z-20 h-full w-full pt-16 md:pt-32 flex items-center">
           {/* Los tres capítulos se renderizan siempre y se apilan en la misma
               celda del grid. Antes AnimatePresence montaba solo el activo, así
               que el prerender capturaba uno de tres y los otros dos no existían
@@ -100,14 +100,14 @@ export const Hero: React.FC = () => {
                   style={{ pointerEvents: activo ? 'auto' : 'none' }}
                   className={`col-start-1 row-start-1 max-w-3xl ${blockAlign} ${textAlign}`}
                 >
-                  <span className="block text-accent text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-6 drop-shadow-lg">
+                  <span className="block text-accent text-sm md:text-base font-medium tracking-[0.3em] uppercase mb-4 md:mb-6 drop-shadow-lg">
                     {c.eyebrow}
                   </span>
-                  <h2 className="text-4xl md:text-7xl font-light text-white mb-6 drop-shadow-lg tracking-tight leading-[1.05]">
+                  <h2 className="text-[length:clamp(1.875rem,8.5vw,2.75rem)] md:text-7xl font-light text-white mb-4 md:mb-6 drop-shadow-lg tracking-tight leading-[1.05]">
                     {c.title}
                   </h2>
                   <p
-                    className="text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed"
+                    className="text-base sm:text-lg md:text-2xl text-light max-w-xl drop-shadow-md font-light leading-relaxed"
                   >
                     {c.description}
                   </p>
@@ -119,7 +119,7 @@ export const Hero: React.FC = () => {
 
         <div className="absolute bottom-10 md:bottom-14 left-0 right-0 z-20 pointer-events-none">
           <div className="px-6 md:px-16 max-w-7xl mx-auto flex items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               {chapters.map((_, i) => (
                 <ChapterDot key={i} active={i <= activeIdx} />
               ))}

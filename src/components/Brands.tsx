@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type PanInfo } from 'framer-motion';
 import { ChevronLeftIcon, ChevronRightIcon } from './icons';
 import { VivGafasLogo, HardemLogo, FaunoLogo, UsualLogo, LisbonLogo } from './brandLogos';
 
@@ -77,6 +77,7 @@ export const Brands: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [paused, setPaused] = useState(false);
+  const [swiped, setSwiped] = useState(false);
 
   useEffect(() => {
     const update = () => {
@@ -96,15 +97,22 @@ export const Brands: React.FC = () => {
   }, [maxIndex]);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || swiped) return;
     const t = setInterval(() => {
       setCurrentIndex((i) => (i >= maxIndex ? 0 : i + 1));
     }, AUTOPLAY_MS);
     return () => clearInterval(t);
-  }, [paused, maxIndex]);
+  }, [paused, swiped, maxIndex]);
 
   const handlePrev = () => setCurrentIndex((i) => (i <= 0 ? maxIndex : i - 1));
   const handleNext = () => setCurrentIndex((i) => (i >= maxIndex ? 0 : i + 1));
+
+  const isMobile = visibleCount === 1;
+  const handleSwipeEnd = (_: unknown, info: PanInfo) => {
+    const swipe = info.offset.x + info.velocity.x * 0.2;
+    if (swipe < -60) setCurrentIndex((i) => Math.min(maxIndex, i + 1));
+    else if (swipe > 60) setCurrentIndex((i) => Math.max(0, i - 1));
+  };
 
   return (
     <section id="marcas" className="py-24 bg-light/30">
@@ -126,7 +134,7 @@ export const Brands: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ amount: 0.5 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-4xl mx-auto"
+              className="text-[length:clamp(1.75rem,8vw,2.5rem)] md:text-6xl font-light text-primary leading-[1.1] tracking-tight max-w-4xl mx-auto"
             >
               Armazones de las marcas más reconocidas
             </motion.h2>
@@ -160,7 +168,7 @@ export const Brands: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 scroll-mt-32"
         >
-          <h2 className="text-4xl md:text-6xl font-light text-primary mb-4 tracking-tight">Lentes que hacen la diferencia</h2>
+          <h2 className="text-[length:clamp(1.75rem,8vw,2.5rem)] md:text-6xl font-light text-primary mb-4 tracking-tight leading-[1.1]">Lentes que hacen la diferencia</h2>
           <p className="text-gray-500 max-w-2xl mx-auto font-light">
             Trabajamos con tecnologías y tratamientos seleccionados para ofrecer una visión más cómoda, nítida y natural.
           </p>
@@ -176,35 +184,49 @@ export const Brands: React.FC = () => {
           onMouseLeave={() => setPaused(false)}
         >
           <div className="overflow-hidden">
+            {/* El drag vive en un wrapper que vuelve a su origen al soltar,
+                mientras el track interno anima el porcentaje del índice: así el
+                dedo arrastra en px sin pelearse con la animación en %. */}
             <motion.div
-              className="flex"
-              animate={{ x: `-${currentIndex * (100 / visibleCount)}%` }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              drag={isMobile ? 'x' : false}
+              dragSnapToOrigin
+              dragDirectionLock
+              dragElastic={0.35}
+              // Si la persona ya desliza a mano, el autoplay le cambiaría la card mientras lee.
+              onDragStart={() => setSwiped(true)}
+              onDragEnd={handleSwipeEnd}
+              style={{ touchAction: 'pan-y' }}
             >
-              {technologies.map((tech, idx) => (
-                <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
-                  <div className="h-full bg-white rounded-[32px] shadow-sm border border-light flex flex-col overflow-hidden">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
-                      <img src={tech.image} alt={`Lentes ${tech.name} — ${tech.category}`} className="w-full h-full object-cover" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-                      <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
-                        <img src={tech.logo} alt={`Logo ${tech.name}`} className="h-full w-full object-cover scale-[1.15]" />
+              <motion.div
+                className="flex"
+                animate={{ x: `-${currentIndex * (100 / visibleCount)}%` }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {technologies.map((tech, idx) => (
+                  <div key={idx} className="w-full md:w-1/2 lg:w-1/3 shrink-0 px-3">
+                    <div className="h-full bg-white rounded-[32px] shadow-sm border border-light flex flex-col overflow-hidden">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden shrink-0">
+                        <img src={tech.image} alt={`Lentes ${tech.name} — ${tech.category}`} className="w-full h-full object-cover" loading="lazy" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+                        <div className="absolute top-1/2 -translate-y-1/2 right-6 w-32 h-32 rounded-full bg-white shadow-lg border border-gray-50 overflow-hidden">
+                          <img src={tech.logo} alt={`Logo ${tech.name}`} className="h-full w-full object-cover scale-[1.15]" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-8 flex flex-col flex-1 justify-between">
-                      <div>
-                        <span className="text-xs font-semibold tracking-widest uppercase text-primary/75 mb-2 block">
-                          {tech.category}
-                        </span>
-                        <h3 className="text-2xl font-bold text-dark mb-3 tracking-tight">{tech.name}</h3>
-                        <p className="text-gray-500 font-light leading-relaxed text-sm">
-                          {tech.description}
-                        </p>
+                      <div className="p-8 flex flex-col flex-1 justify-between">
+                        <div>
+                          <span className="text-xs font-semibold tracking-widest uppercase text-primary/75 mb-2 block">
+                            {tech.category}
+                          </span>
+                          <h3 className="text-2xl font-bold text-dark mb-3 tracking-tight">{tech.name}</h3>
+                          <p className="text-gray-500 font-light leading-relaxed text-sm">
+                            {tech.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </motion.div>
             </motion.div>
           </div>
 
@@ -212,7 +234,7 @@ export const Brands: React.FC = () => {
             type="button"
             onClick={handlePrev}
             aria-label="Anterior"
-            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark flex items-center justify-center transition-all cursor-pointer"
+            className="absolute -left-2 md:-left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark hidden md:flex items-center justify-center transition-all cursor-pointer"
           >
             <ChevronLeftIcon size={22} />
           </button>
@@ -220,7 +242,7 @@ export const Brands: React.FC = () => {
             type="button"
             onClick={handleNext}
             aria-label="Siguiente"
-            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark flex items-center justify-center transition-all cursor-pointer"
+            className="absolute -right-2 md:-right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl hover:bg-primary hover:text-white text-dark hidden md:flex items-center justify-center transition-all cursor-pointer"
           >
             <ChevronRightIcon size={22} />
           </button>
