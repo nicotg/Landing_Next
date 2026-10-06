@@ -4,6 +4,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from 'framer-motion';
+import { useChapterScroll } from '../hooks/useChapterScroll';
 import { DottedBackground } from './DottedBackground';
 import { EyeIcon, GlassesIcon, SunglassesIcon, ContactLensIcon } from './icons';
 import examenVisualImg from '../assets/services/img-Destacado-ExamenVisual.webp';
@@ -65,9 +66,10 @@ export const Services: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState(0);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    const idx = Math.min(services.length - 1, Math.max(0, Math.floor(latest * services.length)));
-    setActiveIdx(idx);
+    setActiveIdx(Math.round(latest * (services.length - 1)));
   });
+
+  useChapterScroll(ref, services.length);
 
   // Mask gradient: difumina los bordes superior e inferior del slider para
   // que el contenido se "diluya" al entrar/salir, sin tocar la opacity.
@@ -79,7 +81,8 @@ export const Services: React.FC = () => {
   };
 
   return (
-    <section id="servicios" ref={ref} className="relative bg-[#eaeaf0] h-[280vh]">
+    <section id="servicios" ref={ref} className="relative bg-[#eaeaf0]"
+      style={{ height: `${services.length * 100}vh` }}>
       <div className="sticky top-0 h-screen overflow-hidden">
         <DottedBackground colorR={255} colorG={255} colorB={255} baseAlpha={0.45} maxAlpha={1} />
 

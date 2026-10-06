@@ -4,8 +4,8 @@ import {
   useMotionValueEvent,
   useScroll,
   useTransform,
-  type MotionValue,
 } from 'framer-motion';
+import { useChapterScroll } from '../hooks/useChapterScroll';
 import heroImg from '../assets/services/img-Hero.webp';
 
 type Align = 'left' | 'right';
@@ -48,18 +48,19 @@ export const Hero: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState(0);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    const idx = Math.min(chapters.length - 1, Math.max(0, Math.floor(latest * chapters.length)));
-    setActiveIdx(idx);
+    setActiveIdx(Math.round(latest * (chapters.length - 1)));
   });
 
+  useChapterScroll(ref, chapters.length);
+
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   const blockAlign = 'mr-auto';
   const textAlign = 'text-left';
 
   return (
-    <section id="hero" ref={ref} className="relative h-[400vh]">
+    <section id="hero" ref={ref} className="relative h-[300vh]">
       {/* El diseño del hero no tiene lugar para un titular fijo, pero la página
           necesita un H1 único con la propuesta de valor y la ubicación. */}
       <h1 className="sr-only">
@@ -120,12 +121,7 @@ export const Hero: React.FC = () => {
           <div className="px-6 md:px-16 max-w-7xl mx-auto flex items-center justify-between gap-6">
             <div className="flex items-center gap-2">
               {chapters.map((_, i) => (
-                <ChapterDot
-                  key={i}
-                  index={i}
-                  total={chapters.length}
-                  scrollYProgress={scrollYProgress}
-                />
+                <ChapterDot key={i} active={i <= activeIdx} />
               ))}
             </div>
             <motion.span
@@ -141,20 +137,14 @@ export const Hero: React.FC = () => {
   );
 };
 
-const ChapterDot: React.FC<{
-  index: number;
-  total: number;
-  scrollYProgress: MotionValue<number>;
-}> = ({ index, total, scrollYProgress }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const scaleX = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
-  return (
-    <div className="w-10 md:w-16 h-[3px] bg-white/25 rounded-full overflow-hidden">
-      <motion.div
-        style={{ scaleX, transformOrigin: 'left' }}
-        className="h-full bg-accent rounded-full"
-      />
-    </div>
-  );
-};
+const ChapterDot: React.FC<{ active: boolean }> = ({ active }) => (
+  <div className="w-10 md:w-16 h-[3px] bg-white/25 rounded-full overflow-hidden">
+    <motion.div
+      initial={false}
+      animate={{ scaleX: active ? 1 : 0 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      style={{ transformOrigin: 'left' }}
+      className="h-full bg-accent rounded-full"
+    />
+  </div>
+);
