@@ -51,7 +51,7 @@ export const Hero: React.FC = () => {
     setActiveIdx(Math.round(latest * (chapters.length - 1)));
   });
 
-  useChapterScroll(ref, chapters.length);
+  useChapterScroll(ref, chapters.length, { reachBelow: false });
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
         anteojos recetados y de sol, y lentes de contacto
       </h1>
 
-      <div className="sticky top-0 h-svh md:h-screen overflow-hidden">
+      <div className="sticky top-0 h-dvh md:h-screen overflow-hidden">
         {/* Fondo con imagen y gradiente azul que llega hasta la derecha */}
         <motion.div style={{ scale: imageScale }} className="absolute inset-0 z-0 origin-center">
           <img
@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
                 <motion.div
                   key={i}
                   initial={false}
-                  animate={{ opacity: activo ? 1 : 0, x: activo ? 0 : i < activeIdx ? -40 : 40 }}
+                  animate={{ opacity: activo ? 1 : 0, y: activo ? 0 : i < activeIdx ? -40 : 40 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   aria-hidden={!activo}
                   style={{ pointerEvents: activo ? 'auto' : 'none' }}
